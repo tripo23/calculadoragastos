@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Gastos</title>
+    <title>Desafío entregable 1</title>
     <link rel="stylesheet" href="./style/css/main.css">
 
     <!-- Google Fonts -->
@@ -12,15 +12,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <!-- Pantalla de login -->
-    <label for="username">Por favor, ingresá tu nombre de usuario<label>
-        <br>
-    <input type="text" id="username" placeholder="usuario">
-    <input id="btn--login" type="submit" value="Ingresar">
-    
-    <!-- Script -->
+    <h1>Calculadora de gastos</h1>
+    <main>
+        <label id="saludo">Hola</label>
+        <h3>Ingresá tu gasto o transacción:</h3>
+        <form id="ingresarContainer">
+                <label id="lblDescripcion" for="descripcion">Descripción</label>
+                <input id="descripcion" type="text" placeholder="Verdulería" required>
+
+                <label id="lblCategoria" for="categoria">Categoría</label>
+                <select id="categoria">
+                    <option value="" hidden disabled selected>Categorías</option>
+                </select>
+
+                <label id="lblMpago" for="mPago">Medio de pago</label>
+                <select id="mPago">
+                    <option value="" hidden disabled selected>Medios de pago</option>
+                </select>
+
+                <label id="lblMonto" for="monto">Monto</label>
+                <input id="monto" type="number" placeholder="400" required>
+
+                <label id="lblCuotas" for="cuotas" style="display:none" >Cantidad de cuotas</label>
+                <input id="cuotas" type="number" placeholder="1" required style="display:none">
+
+                <label id="lblMontoCuota" for="montoCuota" style="display:none" >Valor de la cuota</label>
+                <input id="montoCuota" type="number" placeholder="1" disabled style="display:none">
+                <input id="valCuota" type="number" disabled style="display:none">
+
+                <input id="btn--reset" type="reset" value="Borrar">
+                <input id="btn--send" type="submit" value="Confirmar">    
+        </form>
+    </main>
     <script src="./js/main.js"></script>
 </body>
 </html>
