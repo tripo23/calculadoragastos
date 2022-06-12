@@ -23,6 +23,7 @@ let categoria;
 let mpago;
 let monto;
 let timestamp;
+let username;
 let formularioTransaccion = document.getElementById("ingresarContainer");
 let listCategoria = document.getElementById("categoria");
 let listMpago = document.getElementById("mPago");
@@ -35,19 +36,23 @@ let lblMontoCuota = document.getElementById("lblMontoCuota");
 let inputMontoCuota = document.getElementById("valCuota");
 
 
+/* SALUDO INICIAL */
+
+username = prompt ("¡Hola! Por favor ingresá tu nombre");
+
 /* FUNCIONES */
 
 /* Función para saludar de acuerdo a la hora del día */
 const saludar = document.getElementById("saludo");
 const hora = new Date().getHours();
-const saludos = ["¡Buen día!", "¡Buenas tardes!", "¡Buenas noches!"];
+const saludos = ["¡Buen día", "¡Buenas tardes", "¡Buenas noches"];
 let saludoInicial = "";
 
 if (hora < 12) saludoInicial = saludos[0];
 else if (hora < 18) saludoInicial = saludos[1];
 else saludoInicial = saludos[2];
 
-saludar.innerHTML = saludoInicial;
+saludar.innerHTML = `${saludoInicial} ${username}!`;
 
 /* Función para rellenar los select */
 const populateSelect = (arreglo, select) => {
@@ -61,6 +66,7 @@ const populateSelect = (arreglo, select) => {
 
 /* Función para calcular cuotas */
 const calculadoraDeCuotas = (monto, cuotas) => monto/cuotas;
+
 
 
 /* ACCIONES EN FUNCIÓN DE EVENTOS */
