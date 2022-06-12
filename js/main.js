@@ -65,11 +65,21 @@ const populateSelect = (arreglo, select) => {
 }
 
 /* Función para calcular cuotas */
-const calculadoraDeCuotas = (monto, cuotas) => monto/cuotas;
+const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFixed(2));
 
 
 
 /* ACCIONES EN FUNCIÓN DE EVENTOS */
+
+ /* Capturar la tecla ENTER y no hacer nada, para evitar errores en el formulario */
+
+ document.onkeyup = function (e) {
+    if (e.key === 'Enter') {
+        // no hago nada
+        console.log("presionó enter, me hago el gil");
+    }
+
+ }
 
 /* Si cambio el medio de pago a TC se habilitan las opciones de cuotas */
 listMpago.onchange = () => {

@@ -17,27 +17,28 @@
 <body>
     <h1>Calculadora de gastos</h1>
     <main>
-        <label id="saludo">Hola</label>
+        <label id="saludo"></label>
+
         <h3>Ingresá tu gasto o transacción:</h3>
         <form id="ingresarContainer">
                 <label id="lblDescripcion" for="descripcion">Descripción</label>
                 <input id="descripcion" type="text" placeholder="Verdulería" required>
 
                 <label id="lblCategoria" for="categoria">Categoría</label>
-                <select id="categoria">
-                    <option value="" hidden disabled selected>Categorías</option>
+                <select id="categoria" required>
+                    <option value="" disabled>Categorías</option>
                 </select>
 
                 <label id="lblMpago" for="mPago">Medio de pago</label>
-                <select id="mPago">
-                    <option value="" hidden disabled selected>Medios de pago</option>
+                <select id="mPago" required>
+                    <option value="" disabled>Medios de pago</option>
                 </select>
 
                 <label id="lblMonto" for="monto">Monto</label>
                 <input id="monto" type="number" placeholder="400" required>
 
                 <label id="lblCuotas" for="cuotas" style="display:none" >Cantidad de cuotas</label>
-                <input id="cuotas" type="number" placeholder="1" required style="display:none">
+                <input id="cuotas" type="number" placeholder="1" style="display:none">
 
                 <label id="lblMontoCuota" for="montoCuota" style="display:none" >Valor de la cuota</label>
                 <input id="montoCuota" type="number" placeholder="1" disabled style="display:none">
