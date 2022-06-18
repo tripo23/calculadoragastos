@@ -1,0 +1,49 @@
+const categorias = 
+[
+    {
+        value: "super",
+        text: "Supermercado"
+    }, 
+
+    {
+        value: "inversiones",
+        text: "Inversiones"
+    },
+
+    {
+        value: "sinCulpa",
+        text: "Gastos sin culpa"
+    },
+    
+    {
+        value: "servicios",
+        text: "Servicios"
+    },
+
+    {
+        value: "vivienda",
+        text: "Vivienda"
+    },
+    
+    {
+        value: "vehiculo",
+        text: "Vehículo"
+    },
+    
+    {
+        value: "salud",
+        text: "Salud"
+    },
+    
+    {
+        value: "salidas",
+        text: "Salidas & Delivery"
+    },
+    
+    {
+        value: "vacaciones",
+        text: "Vacaciones"
+    }
+]
+
+export { categorias };
