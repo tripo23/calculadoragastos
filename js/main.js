@@ -1,6 +1,13 @@
-
-import { mediosDePago } from "./mediosDePago.js";
-import { categorias } from './categorias.js';
+import {
+    mediosDePago
+} from "./mediosDePago.js";
+import {
+    categorias
+} from './categorias.js';
+import {
+    modal,
+    modalContent
+} from './modal.js';
 
 /* Constructor del array principal */
 class Transaccion {
@@ -18,8 +25,6 @@ class Transaccion {
 
 
 const transacciones = [];
-
-
 let tipo;
 let descripcion;
 let categoria;
@@ -148,19 +153,23 @@ function validarFormulario(e) {
             console.log(t.mPago);
             transacciones.unshift(new Transaccion(t.tipo, t.descripcion, t.categoria, t.metodoDePago, t.monto, t.cuotas, t.montoCuota, t.timestamp));
         }
-
-        // const merged = transacciones.concat(transaccionesAnteriores);
-        // transacciones.push(new Transaccion(merged));
-        // console.log("merge");
-        // console.log(merged);
     }
 
     localStorage.setItem("transacciones", JSON.stringify(transacciones));
     console.log("el pusheado");
     console.log(transacciones);
 
-    // Confirmo transacción
-    alert(`¡${descripcion} se guardó correctamente!`)
+    // // Confirmo transacción
+    // alert(`¡${descripcion} se guardó correctamente!`)
+
     // Limpio el form
     formularioTransaccion.reset();
+    // Levanto el modal y lo completo
+    let contenidoModal = document.createElement("p");
+    contenidoModal.innerHTML = `¡${descripcion} se guardó correctamente! ¿Querés agregar otro gasto?`;
+
+    modalContent[0].prepend(contenidoModal);
+    modal.style.display = "block";
 }
+
+console.log(modalContent);

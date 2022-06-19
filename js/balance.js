@@ -1,9 +1,19 @@
-/* Constructor del array principal */
 let transacciones;
 let agregarGasto = document.getElementById("btnAgregarGasto");
 let gastos = [];
+let ahorros = [];
+let ingresos = []
 let totalGastos = 0;
-let lblGastos = document.getElementById("lblGastos");
+let agrupadorGastos = 0;
+let totalAhorros = 0;
+let totalBalance = 0;
+let agrupadorAhorros = 0;
+let totalIngresos = 0;
+let agrupadorIngresos = 0;
+let lblGastos = document.getElementById("lblMontoGastos");
+let lblAhorros = document.getElementById("lblMontoAhorro");
+let lblIngresos = document.getElementById("lblMontoIngresos");
+let lblBalance = document.getElementById("lblMontoBalance");
 
 /* SALUDO INICIAL */
 
@@ -22,7 +32,7 @@ usernameRemote = sessionStorage.getItem("user");
 // Acá cambio el label para el saludo al usuario
 if (usernameRemote!="") {
 
-    saludar.innerHTML = `${saludoInicial} ${usernameRemote}!`;
+    // saludar.innerHTML = `${saludoInicial} ${usernameRemote}!`;
 } else {
 
 }
@@ -48,13 +58,20 @@ const mostrarSumaTransaccion = (array, tipo, agrupador, label) => {
         agrupador += parseFloat(t.monto);
     }
 
-    label.innerText = agrupador;
+    label.innerText = "$ " + agrupador;
+    return agrupador;
 }
 
 
 
 if (localStorage.getItem("transacciones") != null) {
-    mostrarSumaTransaccion(gastos,"gasto", totalGastos, lblGastos);
+    totalGastos = mostrarSumaTransaccion(gastos,"gasto", agrupadorGastos, lblGastos);
+    totalAhorros = mostrarSumaTransaccion(ingresos,"ingreso", agrupadorIngresos, lblIngresos);
+    totalIngresos = mostrarSumaTransaccion(ahorros,"ahorro", agrupadorAhorros, lblAhorros);
+    
+    /* Calculo el balance */
+    totalBalance = totalIngresos - totalAhorros - totalGastos;
+    lblBalance.innerText = "$ " + totalBalance;
 }
 
 // Usuario toca el boton "+" de agregar gasto

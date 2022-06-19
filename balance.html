@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +10,63 @@
 
     <!-- Google Fonts -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 
 </head>
+
 <body>
-    <label id="saludo"></label><br>
-    <label id="lblGastos" for="agregarGasto">Gastos</label>
-    <input id="btnAgregarGasto" class="btn--agregar" type="submit" value="Agregar Gasto">
+    <!-- <label id="saludo"></label><br> -->
+    <main class="mainContainer--balance">
+        <h3 class="tituloSeccion">Balance</h3>
+
+        <div class="divContenedor--balance">
+
+            <div class="pastilla--balance">
+                <label id="lblBalance">Balance</label>
+                <label id="lblMontoBalance">$1234</label>
+                <label id="lblplaceholder"></label>
+            </div>
+
+            <div class="pastilla--ingresos">
+                <div class="pastillaLeft--ingresos">
+                    <label id="lblIngresos">Ingresos</label>
+                    <label id="lblMontoIngresos">$1234</label>
+                </div>
+                <div class="pastillaRight--ingresos">
+                    <input id="btnAgregarIngreso" class="btn--agregar" type="submit" value="+"> </div>
+            </div>
+
+            <div class="pastilla--gastos">
+                <div class="pastillaLeft--gastos">
+                    <label id="lblGastos">Gastos</label>
+                    <label id="lblMontoGastos">$1234</label>
+                </div>
+                <div class="pastillaRight--gastos">
+                    <input id="btnAgregarGasto" class="btn--agregar" type="submit" value="+">
+                </div>
+            </div>
+
+            <div class="pastilla--ahorros">
+                <div class="pastillaLeft--ahorros">
+                    <label id="lblAhorros">Ahorros</label>
+                    <label id="lblMontoAhorro">$1234</label>
+                </div>
+                <div class="pastillaRight--ahorros">
+                    <input id="btnAgregarAhorro" class="btn--agregar" type="submit" value="+">
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </main>
 
     <script src="./js/balance.js"></script>
 </body>
+
 </html>

@@ -5,6 +5,9 @@
   color: black;
   font-family: 'Roboto', sans-serif; }
 
+label {
+  color: white; }
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -18,14 +21,136 @@ input[type=number] {
 h1, h2, h3, #saludo {
   padding-left: 5px; }
 
+/* Mixin de contenedor principal */
+.mainContainer--gasto {
+  background-color: #F27D8D; }
+
+.mainContainer--balance {
+  background-color: #05668D; }
+
+/* Mixin containers */
+.divContenedor--balance {
+  display: grid;
+  align-items: center;
+  min-height: 50vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  justify-items: center; }
+
+.divContenedor--gastos {
+  display: grid;
+  align-items: center;
+  min-height: 50vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(14, 1fr); }
+
+/* Mixin pastillas balance */
+.pastilla--balance {
+  width: 60vw;
+  padding: 3vh 0;
+  display: grid;
+  justify-items: end;
+  align-items: center;
+  grid-template-columns: 3fr 1fr;
+  border-radius: 7px;
+  grid-template-columns: 1fr 1fr;
+  background-color: #05668D;
+  justify-items: center;
+  padding: 3vh 0; }
+
+.pastilla--ingresos {
+  width: 60vw;
+  padding: 3vh 0;
+  display: grid;
+  justify-items: end;
+  align-items: center;
+  grid-template-columns: 3fr 1fr;
+  border-radius: 7px; }
+
+.pastilla--gastos {
+  width: 60vw;
+  padding: 3vh 0;
+  display: grid;
+  justify-items: end;
+  align-items: center;
+  grid-template-columns: 3fr 1fr;
+  border-radius: 7px; }
+
+.pastilla--ahorros {
+  width: 60vw;
+  padding: 3vh 0;
+  display: grid;
+  justify-items: end;
+  align-items: center;
+  grid-template-columns: 3fr 1fr;
+  border-radius: 7px; }
+
+.pastillaRight--ingresos {
+  display: grid;
+  width: 60%;
+  height: 120%;
+  border-radius: 7px;
+  text-align: center;
+  background-color: #46AF75; }
+
+.pastillaRight--gastos {
+  display: grid;
+  width: 60%;
+  height: 120%;
+  border-radius: 7px;
+  text-align: center;
+  background-color: #F27D8D; }
+
+.pastillaRight--ahorros {
+  display: grid;
+  width: 60%;
+  height: 120%;
+  border-radius: 7px;
+  text-align: center;
+  background-color: #229FBF; }
+
+.pastillaLeft--ingresos {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 3fr 2fr;
+  width: 100%;
+  height: 120%;
+  background-color: #46AF75;
+  border-radius: 7px;
+  text-align: center;
+  align-items: center;
+  background-color: #46AF75; }
+
+.pastillaLeft--gastos {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 3fr 2fr;
+  width: 100%;
+  height: 120%;
+  background-color: #46AF75;
+  border-radius: 7px;
+  text-align: center;
+  align-items: center;
+  background-color: #F27D8D; }
+
+.pastillaLeft--ahorros {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 3fr 2fr;
+  width: 100%;
+  height: 120%;
+  background-color: #46AF75;
+  border-radius: 7px;
+  text-align: center;
+  align-items: center;
+  background-color: #229FBF; }
+
 /* Mixin de botones */
-#btn--reset, #btn--sendGasto {
-  background-color: #1e1e1e;
+.btn--reset, .btn--sendGasto {
   height: 100%;
   text-decoration: none;
   text-align: center;
   border: none;
-  text-align: center;
   border: 0;
   font-size: 0.8em;
   border-radius: 5px;
@@ -33,43 +158,39 @@ h1, h2, h3, #saludo {
   background-color: #F27D8D;
   color: #F5F5F5;
   grid-row: 13/15;
-  height: 70%; }
+  height: 70%;
+  cursor: pointer; }
 
-#btn--buy {
-  background-color: #1e1e1e;
+.btn--agregar {
   height: 100%;
   text-decoration: none;
   text-align: center;
   border: none;
-  text-align: center;
   border: 0;
   font-size: 0.8em;
   border-radius: 5px;
-  font-weight: 500; }
-
-#ingresarContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(14, 1fr);
-  align-items: center; }
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0);
+  color: #F5F5F5;
+  height: 100%;
+  font-weight: 900;
+  font-size: 2em;
+  cursor: pointer; }
 
 /* Sección ingresar Gasto */
 /* mobile */
 @media screen and (max-width: 767px) {
-  #ingresarContainer {
+  .divContenedor--gastos, .divContenedor--balance {
     background-color: #F5F5F5;
     border-radius: 15px 15px 0 0;
     padding: 10vw; } }
 
 /* desktop */
 @media screen and (min-width: 768px) {
-  #ingresarContainer {
+  .divContenedor--gastos, .divContenedor--balance {
     background-color: #F5F5F5;
     border-radius: 15px 15px 0 0;
     padding: 10vh; } }
-
-#containerIngresarGasto {
-  background-color: #F27D8D; }
 
 .labelsForm {
   color: #1F1F1F;
@@ -87,3 +208,61 @@ h1, h2, h3, #saludo {
   padding: 15px;
   color: #F5F5F5;
   text-align: center; }
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 20vh;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #F5F5F5;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */ }
+
+/* Modal Content */
+.modal-content {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  background-color: #F5F5F5;
+  margin: auto;
+  padding: 3vh;
+  border: 1px solid #888;
+  height: 10vh;
+  width: 70vw;
+  border-radius: 10px; }
+
+/* The Close Button */
+.btnModal {
+  color: #aaaaaa;
+  font-size: 1em;
+  font-weight: bold; }
+
+.btnModal:nth-child(2) {
+  grid-row: 2/3;
+  grid-column: 2/3; }
+
+.btnModal:nth-child(3) {
+  grid-row: 2/3;
+  grid-column: 3/4; }
+
+.btnModal:hover,
+.btnModal:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer; }

@@ -15,10 +15,10 @@
 
 </head>
 <body>
-    <main id="containerIngresarGasto">
+    <main class="mainContainer--gasto" id="containerIngresarGasto">
 
         <h3 class="tituloSeccion">Gastos</h3>
-        <form id="ingresarContainer">
+        <form class="divContenedor--gastos" id="ingresarContainer">
 
                 <label id="lblMonto" for="monto" class="labelsForm">Monto</label>
                 <input id="monto" type="number" placeholder="" required class="inputsForm">
@@ -44,11 +44,24 @@
                 <!-- <input id="montoCuota" type="number" placeholder="" disabled style="display:none" class="inputsForm"> -->
 
                 <!-- <input id="btn--reset" type="reset" value="Borrar" > -->
-                <input id="btn--sendGasto" type="submit" value="Listo">    
+                <input class="btn--sendGasto" type="submit" value="Listo">    
         </form>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="btnModal">Volver</span>
+            <span class="btnModal">Sí</span>
+        </div>
+  
+  </div>
+
     </main>
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/categorias.js"></script>
     <script type="module" src="./js/mediosDePago.js"></script>
+    <script type="module" src="./js/modal.js"></script>
 </body>
 </html>
