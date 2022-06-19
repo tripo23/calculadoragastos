@@ -32,6 +32,7 @@ let metodoDePago;
 let monto;
 let montoCuota;
 let timestamp;
+let cuotas = 0;
 let transaccionesAnteriores;
 let mensajeModal = document.getElementById("mensajeModal")
 let formularioTransaccion = document.getElementById("ingresarContainer");
@@ -166,12 +167,10 @@ function validarFormulario(e) {
 
     // // Confirmo transacción
     // Levanto el modal y lo completo
-    //let contenidoModal = document.createElement("p");
-    mensajeModal.innerHTML = `¡${descripcion} se guardó correctamente! ¿Querés agregar otro gasto?`;
 
-    //modalContent[0].prepend(contenidoModal);
+    mensajeModal.innerHTML = `¡${descripcion} se guardó correctamente! ¿Querés agregar otro gasto?`;
     modal.style.display = "block";
-    //contenidoModal.innerHTML="";
+
 }
 
 console.log(modalContent);

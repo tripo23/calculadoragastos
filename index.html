@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,20 +10,27 @@
 
     <!-- Google Fonts -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 
 </head>
+
 <body>
-    
-    <h1>Calculadora de Gastos</h1>
-    <h2>Iniciá sesión</h2>
-    <form action="" id="formLogin">
-        <label for="loginUsuario" id="lblLoginUsuario">Ingresá tu usuario</label>
-        <input type="text" id="loginUsuario">
-        <input id="btn--send" type="submit" value="Confirmar">    
-    </form>
+    <main class="mainContainer--login">
+        <h1 class="tituloSeccion">Calculadora de Gastos</h1>
+        <h3>Iniciá Sesión</h3>
+        <div class="cajaLogin">
+            <form action="" id="formLogin">
+                <label for="loginUsuario" id="lblLoginUsuario">Usuario</label>
+                <input type="text" id="loginUsuario">
+                <input class="btn--send" id="btn--send" type="submit" value="Confirmar" required/>
+            </form>
+        </div>
+    </main>
     <script src="./js/index.js"></script>
 </body>
+
 </html>

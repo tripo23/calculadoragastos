@@ -1,9 +1,13 @@
-@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
   color: black;
   font-family: 'Roboto', sans-serif; }
+
+html,
+body {
+  height: 100%;
+  overflow-y: hidden; }
 
 label {
   color: white; }
@@ -18,31 +22,62 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield; }
 
-h1, h2, h3, #saludo {
-  padding-left: 5px; }
-
 /* Mixin de contenedor principal */
 .mainContainer--gasto {
+  height: 100%;
   background-color: #F27D8D; }
 
-.mainContainer--balance {
-  background-color: #05668D; }
+.mainContainer--balance, .mainContainer--login {
+  height: 100%;
+  background-color: #05668D;
+  border-radius: 0 0 30% 30%;
+  height: 100%;
+  margin: 0 3vw;
+  text-align: center; }
+
+.mainContainer--login {
+  height: 50%; }
+  .mainContainer--login h2, .mainContainer--login h3 {
+    color: white; }
 
 /* Mixin containers */
-.divContenedor--balance {
+.divContenedor--balance,
+.divContenedor--login {
   display: grid;
   align-items: center;
   min-height: 50vh;
+  height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: 2fr 1fr 1fr 1fr 3fr;
   justify-items: center; }
 
 .divContenedor--gastos {
   display: grid;
   align-items: center;
   min-height: 50vh;
+  height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(14, 1fr); }
+  grid-template-rows: repeat(14, 1fr) 5fr;
+  height: 100%; }
+
+/* mobile */
+@media screen and (max-width: 767px) {
+  .divContenedor--gastos,
+  .divContenedor--balance,
+  .divContenedor--login {
+    background-color: #F5F5F5;
+    border-radius: 15px 15px 0 0;
+    padding: 3vw;
+    padding-bottom: 5vh; } }
+
+/* desktop */
+@media screen and (min-width: 768px) {
+  .divContenedor--gastos,
+  .divContenedor--balance,
+  .divContenedor--login {
+    background-color: #F5F5F5;
+    border-radius: 15px 15px 0 0;
+    padding: 2vh 8vw; } }
 
 /* Mixin pastillas balance */
 .pastilla--balance {
@@ -146,7 +181,8 @@ h1, h2, h3, #saludo {
   background-color: #229FBF; }
 
 /* Mixin de botones */
-.btn--reset, .btn--sendGasto {
+.btn--reset,
+.btn--sendGasto {
   height: 100%;
   text-decoration: none;
   text-align: center;
@@ -159,6 +195,20 @@ h1, h2, h3, #saludo {
   color: #F5F5F5;
   grid-row: 13/15;
   height: 70%;
+  cursor: pointer; }
+
+.btn--send {
+  height: 100%;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border: 0;
+  font-size: 0.8em;
+  border-radius: 5px;
+  font-weight: 500;
+  background-color: #05668D;
+  color: #F5F5F5;
+  height: 100%;
   cursor: pointer; }
 
 .btn--agregar {
@@ -174,30 +224,16 @@ h1, h2, h3, #saludo {
   color: #F5F5F5;
   height: 100%;
   font-weight: 900;
-  font-size: 2em;
+  font-size: 3em;
   cursor: pointer; }
-
-/* Sección ingresar Gasto */
-/* mobile */
-@media screen and (max-width: 767px) {
-  .divContenedor--gastos, .divContenedor--balance {
-    background-color: #F5F5F5;
-    border-radius: 15px 15px 0 0;
-    padding: 10vw; } }
-
-/* desktop */
-@media screen and (min-width: 768px) {
-  .divContenedor--gastos, .divContenedor--balance {
-    background-color: #F5F5F5;
-    border-radius: 15px 15px 0 0;
-    padding: 10vh; } }
 
 .labelsForm {
   color: #1F1F1F;
   font-weight: 500;
   font-size: 0.8em; }
 
-.inputsForm, .selectForm {
+.inputsForm,
+.selectForm {
   height: 3vh;
   font-size: 0.8em;
   background-color: rgba(0, 0, 0, 0);
@@ -266,3 +302,24 @@ h1, h2, h3, #saludo {
   color: #000;
   text-decoration: none;
   cursor: pointer; }
+
+#waves {
+  grid-row: 5/6; }
+
+.cajaLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15vh 15vw;
+  background-color: white;
+  height: 100%;
+  filter: drop-shadow(0px 2px 1px #3f3f3f);
+  border-radius: 10px; }
+
+#formLogin {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  #formLogin label {
+    color: black; }
