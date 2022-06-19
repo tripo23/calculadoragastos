@@ -33,6 +33,7 @@ let monto;
 let montoCuota;
 let timestamp;
 let transaccionesAnteriores;
+let mensajeModal = document.getElementById("mensajeModal")
 let formularioTransaccion = document.getElementById("ingresarContainer");
 let listCategoria = document.getElementById("categoria");
 let listMpago = document.getElementById("mPago");
@@ -159,17 +160,18 @@ function validarFormulario(e) {
     console.log("el pusheado");
     console.log(transacciones);
 
-    // // Confirmo transacción
-    // alert(`¡${descripcion} se guardó correctamente!`)
 
     // Limpio el form
     formularioTransaccion.reset();
-    // Levanto el modal y lo completo
-    let contenidoModal = document.createElement("p");
-    contenidoModal.innerHTML = `¡${descripcion} se guardó correctamente! ¿Querés agregar otro gasto?`;
 
-    modalContent[0].prepend(contenidoModal);
+    // // Confirmo transacción
+    // Levanto el modal y lo completo
+    //let contenidoModal = document.createElement("p");
+    mensajeModal.innerHTML = `¡${descripcion} se guardó correctamente! ¿Querés agregar otro gasto?`;
+
+    //modalContent[0].prepend(contenidoModal);
     modal.style.display = "block";
+    //contenidoModal.innerHTML="";
 }
 
 console.log(modalContent);
