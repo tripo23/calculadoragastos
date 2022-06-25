@@ -23,16 +23,18 @@ input[type=number] {
   -moz-appearance: textfield; }
 
 /* Mixin de contenedor principal */
-.mainContainer--gasto {
+.mainContainer--gastos {
   height: 100%;
   background-color: #F27D8D; }
+
+.mainContainer--ingresos {
+  height: 100%;
+  background-color: #46AF75; }
 
 .mainContainer--balance, .mainContainer--login {
   height: 100%;
   background-color: #05668D;
   border-radius: 0 0 30% 30%;
-  height: 100%;
-  margin: 0 3vw;
   text-align: center; }
 
 .mainContainer--login {
@@ -57,7 +59,7 @@ input[type=number] {
   min-height: 50vh;
   height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(14, 1fr) 5fr;
+  grid-template-rows: repeat(16, 1fr) 3fr;
   height: 100%; }
 
 /* mobile */
@@ -67,11 +69,15 @@ input[type=number] {
   .divContenedor--login {
     background-color: #F5F5F5;
     border-radius: 15px 15px 0 0;
-    padding: 3vw;
-    padding-bottom: 5vh; } }
+    padding-bottom: 5vh; }
+  .divContenedor--gastos {
+    padding: 4vw; } }
 
 /* desktop */
 @media screen and (min-width: 768px) {
+  .mainContainer--login {
+    margin: 0 auto;
+    max-width: 50vw; }
   .divContenedor--gastos,
   .divContenedor--balance,
   .divContenedor--login {
@@ -81,7 +87,7 @@ input[type=number] {
 
 /* Mixin pastillas balance */
 .pastilla--balance {
-  width: 60vw;
+  width: 80vw;
   padding: 3vh 0;
   display: grid;
   justify-items: end;
@@ -94,7 +100,7 @@ input[type=number] {
   padding: 3vh 0; }
 
 .pastilla--ingresos {
-  width: 60vw;
+  width: 80vw;
   padding: 3vh 0;
   display: grid;
   justify-items: end;
@@ -103,7 +109,7 @@ input[type=number] {
   border-radius: 7px; }
 
 .pastilla--gastos {
-  width: 60vw;
+  width: 80vw;
   padding: 3vh 0;
   display: grid;
   justify-items: end;
@@ -112,7 +118,7 @@ input[type=number] {
   border-radius: 7px; }
 
 .pastilla--ahorros {
-  width: 60vw;
+  width: 80vw;
   padding: 3vh 0;
   display: grid;
   justify-items: end;
@@ -193,7 +199,22 @@ input[type=number] {
   font-weight: 500;
   background-color: #F27D8D;
   color: #F5F5F5;
-  grid-row: 13/15;
+  grid-row: 15/17;
+  height: 70%;
+  cursor: pointer; }
+
+.btn--sendIngreso {
+  height: 100%;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border: 0;
+  font-size: 0.8em;
+  border-radius: 5px;
+  font-weight: 500;
+  background-color: #46AF75;
+  color: #F5F5F5;
+  grid-row: 15/17;
   height: 70%;
   cursor: pointer; }
 
@@ -226,6 +247,22 @@ input[type=number] {
   font-weight: 900;
   font-size: 3em;
   cursor: pointer; }
+
+.btn--back {
+  height: 100%;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border: 0;
+  font-size: 0.8em;
+  border-radius: 5px;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  font-weight: 500;
+  font-size: 1.2em;
+  padding-left: 1vw;
+  border: 0; }
 
 .labelsForm {
   color: #1F1F1F;
@@ -271,10 +308,10 @@ input[type=number] {
 /* Modal Content */
 .modal-content {
   display: grid;
-  grid-template-rows: 3fr 1fr;
+  grid-template-rows: 8fr 1fr;
   grid-template-columns: 3fr 1fr 1fr;
   justify-items: center;
-  align-items: center;
+  align-items: start;
   background-color: #F5F5F5;
   margin: auto;
   padding: 3vh;
@@ -282,6 +319,10 @@ input[type=number] {
   height: 10vh;
   width: 70vw;
   border-radius: 10px; }
+
+#mensajeModal {
+  grid-column: 1/4;
+  text-align: center; }
 
 /* The Close Button */
 .btnModal {
@@ -323,3 +364,11 @@ input[type=number] {
   justify-content: space-between; }
   #formLogin label {
     color: black; }
+
+.header {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 50fr;
+  align-items: center;
+  justify-content: center;
+  justify-items: center; }

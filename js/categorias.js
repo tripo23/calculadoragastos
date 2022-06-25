@@ -1,4 +1,4 @@
-const categorias = 
+const categoriasGastos = 
 [
     {
         value: "super",
@@ -46,4 +46,32 @@ const categorias =
     }
 ]
 
-export { categorias };
+const categoriasIngresos = 
+[
+    {
+        value: "sueldo",
+        text: "Sueldo"
+    }, 
+
+    {
+        value: "devoluciones",
+        text: "Devoluciones"
+    },
+
+    {
+        value: "aguinaldo",
+        text: "Aguinaldo"
+    },
+    
+    {
+        value: "bono",
+        text: "Bono"
+    },
+
+    {
+        value: "otro",
+        text: "Otros"
+    }
+]
+
+export { categoriasGastos, categoriasIngresos };

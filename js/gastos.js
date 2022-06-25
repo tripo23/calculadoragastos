@@ -2,30 +2,23 @@ import {
     mediosDePago
 } from "./mediosDePago.js";
 import {
-    categorias
+    categoriasGastos
 } from './categorias.js';
 import {
     modal,
     modalContent
 } from './modal.js';
-
-/* Constructor del array principal */
-class Transaccion {
-    constructor(tipo, descripcion, categoria, metodoDePago, monto, qCuotas, montoCuota, timestamp) {
-        this.tipo = tipo;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.metodoDePago = metodoDePago;
-        this.monto = parseFloat(monto);
-        this.qCuotas = parseInt(qCuotas);
-        this.montoCuota = montoCuota;
-        this.timestamp = timestamp;
-    }
-}
+import {
+    fechaHoy,
+    populateSelect
+} from './functions.js';
+import {
+    Transaccion
+} from './constTransaccion.js';
 
 
 const transacciones = [];
-let tipo;
+let tipo = "gasto";
 let descripcion;
 let categoria;
 let metodoDePago;
@@ -33,8 +26,10 @@ let monto;
 let montoCuota;
 let timestamp;
 let cuotas = 0;
+let fecha = Date();
 let transaccionesAnteriores;
-let mensajeModal = document.getElementById("mensajeModal")
+let inputFecha = document.getElementById("fechaGasto");
+let mensajeModal = document.getElementById("mensajeModal");
 let formularioTransaccion = document.getElementById("ingresarContainer");
 let listCategoria = document.getElementById("categoria");
 let listMpago = document.getElementById("mPago");
@@ -47,20 +42,10 @@ let lblMontoCuota = document.getElementById("lblMontoCuota");
 let inputMontoCuota = document.getElementById("valCuota");
 
 
-
+inputMonto.focus();
 
 /* FUNCIONES */
 
-
-/* Función para rellenar los select */
-const populateSelect = (arreglo, select) => {
-    for (const c of arreglo) {
-        let option = document.createElement("option");
-        option.value = c.value;
-        option.textContent = c.text;
-        select.appendChild(option);
-    }
-}
 
 /* Función para calcular cuotas */
 const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFixed(2));
@@ -106,16 +91,31 @@ inputCuotas.onchange = () => {
     }
 }
 
+/* Valido que el contenido de MONTO sea número */
+
 inputMonto.onchange = () => {
+
+    if (isNaN(inputMonto.value)) {
+        /* Por lo que estuve leyendo, el evento onChange no funciona cuando tipeas caracteres de tipo texto en un textbox de tipo número */
+        alert("Por favor ingresá solo números");
+        inputMonto.value="";
+        inputMonto.focus();
+    }
+
     if (!inputCuotas.value < 1) {
         inputMontoCuota.value = calculadoraDeCuotas(parseInt(inputMonto.value), parseInt(inputCuotas.value));
     }
 }
 
 
+
+/* COMPLETO EL FORM EN VALORES DEFAULT */
+
 /* Populo los select con los array */
-populateSelect(categorias, listCategoria);
+populateSelect(categoriasGastos, listCategoria);
 populateSelect(mediosDePago, listMpago);
+
+fechaHoy(inputFecha);
 
 /* REVISO SI HAY TRANSACCIONES ANTERIORES EN EL LOCALSTORAGE */
 
@@ -132,7 +132,8 @@ formularioTransaccion.addEventListener("submit", validarFormulario);
 function validarFormulario(e) {
 
     e.preventDefault();
-    tipo = "gasto";
+    tipo;
+    fecha = inputFecha.value;
     descripcion = inputDescripcion.value;
     categoria = listCategoria.value;
     metodoDePago = listMpago.value;
@@ -144,7 +145,7 @@ function validarFormulario(e) {
 
 
     // Acá guardo todo en el array
-    transacciones.push(new Transaccion(tipo, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp));
+    transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp));
 
     // Llevo lo del localStorage viejo a las transacciones nuevas
     if (transaccionesAnteriores != null) {
@@ -153,7 +154,7 @@ function validarFormulario(e) {
             console.log("cada t");
             console.log(t);
             console.log(t.mPago);
-            transacciones.unshift(new Transaccion(t.tipo, t.descripcion, t.categoria, t.metodoDePago, t.monto, t.cuotas, t.montoCuota, t.timestamp));
+            transacciones.unshift(new Transaccion(t.tipo, t.fecha, t.descripcion, t.categoria, t.metodoDePago, t.monto, t.cuotas, t.montoCuota, t.timestamp));
         }
     }
 
@@ -169,8 +170,24 @@ function validarFormulario(e) {
     // Levanto el modal y lo completo
 
     mensajeModal.innerHTML = `¡${descripcion} se guardó correctamente! ¿Querés agregar otro gasto?`;
-    modal.style.display = "block";
+    //modal.style.display = "block";
 
+        /* Muestro el Sweet Alert */
+
+    
+   
+        Swal.fire({
+            title: 'Gasto agregado!',
+            text: "¿Querés agregar otro?",
+            icon: 'success',
+            showCancelButton: true,
+            cancelButtonText: 'Agregar otro!',
+            confirmButtonText: 'No, ver balance'
+            
+        }).then((result) => {
+    
+            if (result.isConfirmed) {
+                window.location.href = "balance.html";
+            }
+        })
 }
-
-console.log(modalContent);

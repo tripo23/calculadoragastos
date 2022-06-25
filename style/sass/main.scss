@@ -34,17 +34,20 @@ input[type=number] {
     height: 100%;
 }
 
-.mainContainer--gasto {
+.mainContainer--gastos {
     @include mainContainer;
     background-color: #F27D8D;
+}
+
+.mainContainer--ingresos {
+    @include mainContainer;
+    background-color: #46AF75;
 }
 
 .mainContainer--balance, .mainContainer--login  {
     @include mainContainer;
     background-color: #05668D;
     border-radius: 0 0 30% 30%;
-    height: 100%;
-    margin: 0 3vw;
     text-align: center;
 }
 
@@ -74,7 +77,7 @@ input[type=number] {
 .divContenedor--gastos {
     @include divContenedor;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(14, 1fr) 5fr;
+    grid-template-rows: repeat(16, 1fr) 3fr;
     height: 100%;
 }
 
@@ -86,14 +89,22 @@ input[type=number] {
     .divContenedor--login {
         background-color: #F5F5F5;
         border-radius: 15px 15px 0 0;
-        padding: 3vw;
+        //padding: 3vw;
         padding-bottom: 5vh;
+    }
+
+    .divContenedor--gastos {
+        padding: 4vw;
     }
 }
 
 /* desktop */
 @media screen and (min-width: 768px) {
 
+    .mainContainer--login{
+        margin: 0 auto;
+        max-width: 50vw;
+    }
     .divContenedor--gastos,
     .divContenedor--balance,
     .divContenedor--login {
@@ -106,7 +117,7 @@ input[type=number] {
 
 /* Mixin pastillas balance */
 @mixin pastilla {
-    width: 60vw;
+    width: 80vw;
     padding: 3vh 0;
     display: grid;
     justify-items: end;
@@ -204,7 +215,16 @@ input[type=number] {
     @include btn;
     background-color: #F27D8D;
     color: #F5F5F5;
-    grid-row: 13/15;
+    grid-row: 15/17;
+    height: 70%;
+    cursor: pointer;
+}
+
+.btn--sendIngreso {
+    @include btn;
+    background-color: #46AF75;
+    color: #F5F5F5;
+    grid-row: 15/17;
     height: 70%;
     cursor: pointer;
 }
@@ -225,6 +245,16 @@ input[type=number] {
     font-weight: 900;
     font-size: 3em;
     cursor: pointer;
+}
+
+.btn--back {
+    @include btn;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-weight: 500;
+    font-size: 1.2em;
+    padding-left: 1vw;
+    border: 0;
 }
 
 .labelsForm {
@@ -277,10 +307,10 @@ input[type=number] {
 /* Modal Content */
 .modal-content {
     display: grid;
-    grid-template-rows: 3fr 1fr;
+    grid-template-rows: 8fr 1fr;
     grid-template-columns: 3fr 1fr 1fr;
     justify-items: center;
-    align-items: center;
+    align-items: start;
     background-color: #F5F5F5;
     margin: auto;
     padding: 3vh;
@@ -288,6 +318,12 @@ input[type=number] {
     height: 10vh;
     width: 70vw;
     border-radius: 10px;
+}
+
+
+#mensajeModal {
+    grid-column: 1/4;
+    text-align: center;
 }
 
 /* The Close Button */
@@ -342,3 +378,14 @@ input[type=number] {
         color: black;
     }
 }
+
+.header {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 50fr;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+

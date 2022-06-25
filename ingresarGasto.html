@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío entregable 1</title>
+    <title>Gastos</title>
     <link rel="stylesheet" href="./style/css/main.css">
+    <!-- Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Google Fonts -->
 
@@ -15,10 +17,16 @@
 
 </head>
 <body>
-    <main class="mainContainer--gasto" id="containerIngresarGasto">
+    <main class="mainContainer--gastos" id="containerIngresarGasto">
 
-        <h3 class="tituloSeccion">Gastos</h3>
+        <div class="header">
+            <button class="btn--back" onclick="history.back()"><</button>
+            <h3 class="tituloSeccion">Gastos</h3>
+       </div>
         <form class="divContenedor--gastos" id="ingresarContainer">
+
+                <label id="lblfechaGasto" for="fechaGasto" class="labelsForm">¿Cuándo hiciste el gasto?</label>
+                <input id="fechaGasto" type="date">
 
                 <label id="lblMonto" for="monto" class="labelsForm">Monto</label>
                 <input id="monto" type="number" placeholder="" required class="inputsForm">
@@ -60,7 +68,7 @@
   </div>
 
     </main>
-    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/gastos.js"></script>
     <script type="module" src="./js/categorias.js"></script>
     <script type="module" src="./js/mediosDePago.js"></script>
     <script type="module" src="./js/modal.js"></script>

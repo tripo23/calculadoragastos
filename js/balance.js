@@ -1,5 +1,7 @@
 let transacciones;
 let agregarGasto = document.getElementById("btnAgregarGasto");
+let agregarIngreso = document.getElementById("btnAgregarIngreso");
+let agregarAhorro = document.getElementById("btnAgregarAhorro");
 let gastos = [];
 let ahorros = [];
 let ingresos = []
@@ -66,13 +68,18 @@ const mostrarSumaTransaccion = (array, tipo, agrupador, label) => {
 
 if (localStorage.getItem("transacciones") != null) {
     totalGastos = mostrarSumaTransaccion(gastos,"gasto", agrupadorGastos, lblGastos);
-    totalAhorros = mostrarSumaTransaccion(ingresos,"ingreso", agrupadorIngresos, lblIngresos);
-    totalIngresos = mostrarSumaTransaccion(ahorros,"ahorro", agrupadorAhorros, lblAhorros);
+    totalIngresos = mostrarSumaTransaccion(ingresos,"ingreso", agrupadorIngresos, lblIngresos);
+    totalAhorros = mostrarSumaTransaccion(ahorros,"ahorro", agrupadorAhorros, lblAhorros);
     
     /* Calculo el balance */
     totalBalance = totalIngresos - totalAhorros - totalGastos;
     lblBalance.innerText = "$ " + totalBalance;
 }
 
-// Usuario toca el boton "+" de agregar gasto
-agregarGasto.onclick = () => { window.location.href = "ingresarGasto.html"; } 
+// Usuario toca el boton "+".
+const link = (boton, destino) => {
+    boton.onclick = () => { window.location.href = destino; } 
+}
+
+link(agregarGasto,"ingresarGasto.html");
+link(agregarIngreso,"ingresos.html");
