@@ -52,7 +52,7 @@ if (localStorage.getItem("transacciones") != null) {
 
 const mostrarSumaTransaccion = (array, tipo, agrupador, label) => {
 
-    /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO <por ahora son solo "gastos"> */
+    /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO */
 
     array = transacciones.filter((e) => e.tipo.includes(tipo));
     console.log(array);
