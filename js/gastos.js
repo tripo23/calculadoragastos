@@ -8,7 +8,8 @@ import {
 
 import {
     fechaHoy,
-    populateSelect
+    populateSelect,
+    calculadoraDeCuotas
 } from './functions.js';
 
 import {
@@ -31,25 +32,6 @@ let inputMontoCuota = document.getElementById("valCuota");
 
 inputMonto.focus();
 
-/* FUNCIONES */
-
-
-/* Función para calcular cuotas */
-const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFixed(2));
-
-
-
-/* ACCIONES EN FUNCIÓN DE EVENTOS */
-
-/* Capturar la tecla ENTER y no hacer nada, para evitar errores en el formulario */
-
-document.onkeyup = function (e) {
-    if (e.key === 'Enter') {
-        // no hago nada
-        console.log("presionó enter, me hago el gil");
-    }
-
-}
 
 /* Si cambio el medio de pago a TC se habilitan las opciones de cuotas */
 listMpago.onchange = () => {
@@ -78,38 +60,22 @@ inputCuotas.onchange = () => {
     }
 }
 
-/* Valido que el contenido de MONTO sea número */
-
 inputMonto.onchange = () => {
-
-    if (isNaN(inputMonto.value)) {
-        /* Por lo que estuve leyendo, el evento onChange no funciona cuando tipeas caracteres de tipo texto en un textbox de tipo número */
-        alert("Por favor ingresá solo números");
-        inputMonto.value="";
-        inputMonto.focus();
-    }
+    /* Valido que el contenido de MONTO sea número */
+    isNan(inputMonto.value) && alert("Por favor ingresá solo números");
 
     if (!inputCuotas.value < 1) {
         inputMontoCuota.value = calculadoraDeCuotas(parseInt(inputMonto.value), parseInt(inputCuotas.value));
     }
 }
 
-
-
-/* COMPLETO EL FORM EN VALORES DEFAULT */
-
 /* Populo los select con los array */
 populateSelect(categoriasGastos, listCategoria);
 populateSelect(mediosDePago, listMpago);
-
 fechaHoy(inputFecha);
-
-/* CHECKOUT */
 
 /* Cuando el usuario le da "CONFIRMAR", guardo toda la info en mi array principal de transacciones y en el localStorage */
 
 formularioTransaccion.onsubmit = () => {
-
-    validarFormulario(event, formularioTransaccion,"gasto",inputFecha.value, inputDescripcion.value, listCategoria.value,listMpago.value,inputMonto.value,inputCuotas.value,inputMontoCuota.value,new Date ());
-
+    validarFormulario(event, formularioTransaccion, "gasto", inputFecha.value, inputDescripcion.value, listCategoria.value, listMpago.value, inputMonto.value, inputCuotas.value, inputMontoCuota.value, new Date());
 }
