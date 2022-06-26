@@ -27,7 +27,7 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label) =
     /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO */
 
     array = arrayPrincipal.filter((e) => e.tipo.includes(tipo));
-    console.log(array);
+    console.log(e);
     for (const t of array) {
         agrupador += parseFloat(t.monto);
     }
