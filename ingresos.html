@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingresos</title>
     <link rel="stylesheet" href="./style/css/main.css">
+
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!-- Toastify -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
     <!-- Google Fonts -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -22,7 +24,7 @@
 <body>
     <main class="mainContainer--ingresos" id="containerIngresarIngreso">
        <div class="header">
-            <button class="btn--back" onclick="history.back()"><</button>
+            <button class="btn--back" onclick="window.location.href='balance.html'"><</button>
             <h3 class="tituloSeccion">Ingresos</h3>
        </div>
         
@@ -45,16 +47,6 @@
               
                 <input class="btn--sendIngreso" type="submit" value="Listo">    
         </form>
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            <p id="mensajeModal"></p>
-            <span class="btnModal">Volver</span>
-            <span class="btnModal">Sí</span>
-        </div>
   
   </div>
 

@@ -5,12 +5,12 @@ import {
 const transacciones = [];
 let transaccionesAnteriores;
 transaccionesAnteriores = JSON.parse(localStorage.getItem("transacciones"));
-console.log("las transacciones del localStorage");
-console.log(transaccionesAnteriores);
+// console.log("las transacciones del localStorage");
+// console.log(transaccionesAnteriores);
 
-function validarFormulario(formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp) {
+function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp) {
 
-    //e.preventDefault();
+    event.preventDefault();
 
     // Acá guardo todo en el array
     transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp));
@@ -27,15 +27,13 @@ function validarFormulario(formulario, tipo, fecha, descripcion, categoria, meto
     }
 
     localStorage.setItem("transacciones", JSON.stringify(transacciones));
-    // console.log("el pusheado");
-    // console.log(transacciones);
-
 
     // Limpio el form
     formulario.reset();
 
+    /* Mensaje de confirmación */
     Toastify({
-        text: "Ingreso agregado ✅",
+        text: "Transacción agregada ✅",
         duration: 3000,
         gravity: "bottom",
         position: "center",
