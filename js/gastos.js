@@ -110,6 +110,6 @@ fechaHoy(inputFecha);
 
 formularioTransaccion.onsubmit = () => {
 
-    validarFormulario(e, formularioTransaccion,"gasto",inputFecha.value, inputDescripcion.value, listCategoria.value,listMpago.value,inputMonto.value,inputCuotas.value,inputMontoCuota.value,new Date ());
+    validarFormulario(event, formularioTransaccion,"gasto",inputFecha.value, inputDescripcion.value, listCategoria.value,listMpago.value,inputMonto.value,inputCuotas.value,inputMontoCuota.value,new Date ());
 
 }

@@ -32,19 +32,35 @@ function validarFormulario(event, formulario, tipo, fecha, descripcion, categori
     formulario.reset();
 
     /* Mensaje de confirmación */
-    Toastify({
-        text: "Transacción agregada ✅",
-        duration: 3000,
-        gravity: "bottom",
-        position: "center",
-        style: {
-            background: "#05668D",
-            color: "white",
-        },
-    }).showToast();
+    
+    // Toastify({
+    //     text: "Transacción agregada ✅",
+    //     duration: 3000,
+    //     gravity: "bottom",
+    //     position: "center",
+    //     style: {
+    //         background: "#05668D",
+    //         color: "white",
+    //     },
+    // }).showToast();
+
+    Swal.fire({
+        title: `Transacción agregada!`,
+        text:`¿Querés agregar otro ${tipo}?`,
+        icon:'success',
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: '👍 Sip!',
+        cancelButtonText: '🙅‍♂️ Nop',
+    }).then((result) => {
+        if (!result.isConfirmed) {
+            window.location.href='balance.html'
+        }
+    })
+
 
 }
 
 export {
     validarFormulario
-};
+};  

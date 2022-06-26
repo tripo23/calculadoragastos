@@ -40,6 +40,8 @@ if (usernameRemote!="") {
 }
 
 /* Me traigo las transacciones guardadas en el localStorage */
+
+
 if (localStorage.getItem("transacciones") != null) {
 
     transacciones = JSON.parse(localStorage.getItem("transacciones"));
