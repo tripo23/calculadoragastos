@@ -74,4 +74,66 @@ const categoriasIngresos =
     }
 ]
 
-export { categoriasGastos, categoriasIngresos };
+const meses = [
+    {
+        value: "01",
+        text: "Enero"
+    }, 
+
+    {
+        value: "02",
+        text: "Febrero"
+    },
+
+    {
+        value: "03",
+        text: "Marzo"
+    },
+    
+    {
+        value: "04",
+        text: "Abril"
+    },
+
+    {
+        value: "05",
+        text: "Mayo"
+    },
+
+    {
+        value: "06",
+        text: "Junio"
+    },
+
+    {
+        value: "07",
+        text: "Julio"
+    },
+
+    {
+        value: "08",
+        text: "Agosto"
+    },
+
+    {
+        value: "09",
+        text: "Septiembre"
+    },
+
+    {
+        value: "10",
+        text: "Octubre"
+    },
+
+    {
+        value: "11",
+        text: "Noviembre"
+    },
+
+    {
+        value: "12",
+        text: "Diciembre"
+    }
+]
+
+export { categoriasGastos, categoriasIngresos, meses };

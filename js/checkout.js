@@ -20,6 +20,8 @@ function validarFormulario(event, formulario, tipo, fecha, descripcion, categori
     /* subo todo al local storage */
     localStorage.setItem("transacciones", JSON.stringify(transacciones));
 
+    console.log(JSON.stringify(transacciones));
+
     // Limpio el form
     formulario.reset();
 

@@ -1,9 +1,16 @@
 import {
     mostrarSumaTransaccion,
-    link
+    populateSelect,
+    link,
+    mesActual
 } from "./functions.js";
 
+import {
+    meses
+} from './categorias.js';
+
 let transacciones;
+let selectMeses = document.getElementById("selectorMes");
 let agregarGasto = document.getElementById("btnAgregarGasto");
 let agregarIngreso = document.getElementById("btnAgregarIngreso");
 let agregarAhorro = document.getElementById("btnAgregarAhorro");
@@ -22,19 +29,30 @@ let lblAhorros = document.getElementById("lblMontoAhorro");
 let lblIngresos = document.getElementById("lblMontoIngresos");
 let lblBalance = document.getElementById("lblMontoBalance");
 
+/* Completo los meses en el select, y asigno el mes actual como valor por default */
+populateSelect(meses, selectMeses)
+selectMeses.value = mesActual();
 
 /* Me traigo las transacciones guardadas en el localStorage */
 transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
 
 /* Calculo los totales, según el tipo de transacción */
-totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, lblGastos);
-totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, lblIngresos);
-totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, lblAhorros);
+const calcularTotales = () => {
+    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, lblGastos, selectMeses.value);
+    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, lblIngresos, selectMeses.value);
+    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, lblAhorros, selectMeses.value);
+    
+    /* Calculo el balance */
+    totalBalance = totalIngresos - totalAhorros - totalGastos;
+    lblBalance.innerText = "$ " + totalBalance;
+}
 
-/* Calculo el balance */
-totalBalance = totalIngresos - totalAhorros - totalGastos;
-lblBalance.innerText = "$ " + totalBalance;
+calcularTotales();
 
+/* recalculo cuando selecciono un mes distinto */
+selectMeses.onchange = () => {
+    calcularTotales();
+}
 
 link(agregarGasto, "ingresarGasto.html");
 link(agregarIngreso, "ingresos.html");

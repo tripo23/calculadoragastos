@@ -20,15 +20,26 @@ const fechaHoy = (input) => {
     input.defaultValue = today;
 }
 
+ /* Mes actual */
+
+ const mesActual = () => {
+    let today = new Date();
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    return mm;
+ }
+
+
 // Recorro las transacciones y sumo el total por tipo
 
-const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label) => {
+const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, mes) => {
 
     /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO */
-
-    array = arrayPrincipal.filter((e) => e.tipo.includes(tipo));
-    console.log(e);
+    const fechaBusqueda = ("2022-"+mes.toString()).toString();
+    
+    array = arrayPrincipal.filter((e) => e.tipo.includes(tipo) && e.fecha.includes(fechaBusqueda));
+    
     for (const t of array) {
+        console.log(t.fecha);
         agrupador += parseFloat(t.monto);
     }
 
@@ -45,6 +56,7 @@ const link = (boton, destino) => {
 
 /* Función para calcular cuotas */
 const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFixed(2));
+
 
 /* SALUDO INICIAL */
 
@@ -73,5 +85,6 @@ export {
     fechaHoy,
     mostrarSumaTransaccion,
     link,
-    calculadoraDeCuotas
+    calculadoraDeCuotas,
+    mesActual
 };
