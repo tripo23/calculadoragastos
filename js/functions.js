@@ -46,7 +46,7 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, m
     /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO */
     const fechaBusqueda = ("2022-"+mes.toString()).toString();
     
-    array = arrayPrincipal.filter((e) => e.tipo.includes(tipo) && e.fecha.includes(fechaBusqueda));
+    array = arrayPrincipal.filter((e) => (e.tipo.includes(tipo) && e.fecha.includes(fechaBusqueda)));
     
     for (const t of array) {
         agrupador += parseFloat(t.monto);

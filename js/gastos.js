@@ -53,9 +53,6 @@ inputCuotas.onchange = () => {
 }
 
 inputMonto.onchange = () => {
-    /* Valido que el contenido de MONTO sea número */
-    isNan(inputMonto.value) && alert("Por favor ingresá solo números");
-
     if (!inputCuotas.value < 1) {
         inputMontoCuota.value = calculadoraDeCuotas(parseInt(inputMonto.value), parseInt(inputCuotas.value));
     }
