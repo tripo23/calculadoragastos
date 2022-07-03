@@ -2,12 +2,9 @@ import {
     mostrarSumaTransaccion,
     populateSelect,
     link,
-    mesActual
+    dolarBlue
 } from "./functions.js";
 
-import {
-    meses
-} from './categorias.js';
 
 let transacciones;
 let selectMeses = document.getElementById("selectorMes");
@@ -28,10 +25,11 @@ let lblGastos = document.getElementById("lblMontoGastos");
 let lblAhorros = document.getElementById("lblMontoAhorro");
 let lblIngresos = document.getElementById("lblMontoIngresos");
 let lblBalance = document.getElementById("lblMontoBalance");
+let lblDolar = document.getElementById("lblDolar");
 
 /* Completo los meses en el select, y asigno el mes actual como valor por default */
-populateSelect(meses, selectMeses)
-selectMeses.value = mesActual();
+populateSelect("meses", selectMeses)
+
 
 /* Me traigo las transacciones guardadas en el localStorage */
 transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
@@ -54,5 +52,8 @@ selectMeses.onchange = () => {
     calcularTotales();
 }
 
+// Links para los botones "+"
 link(agregarGasto, "ingresarGasto.html");
 link(agregarIngreso, "ingresos.html");
+
+dolarBlue(lblDolar);

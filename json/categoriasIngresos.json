@@ -1,0 +1,16 @@
+[{
+    "value": "sueldo",
+    "text": "Sueldo"
+}, {
+    "value": "devoluciones",
+    "text": "Devoluciones"
+}, {
+    "value": "aguinaldo",
+    "text": "Aguinaldo"
+}, {
+    "value": "bono",
+    "text": "Bono"
+}, {
+    "value": "otro",
+    "text": "Otros"
+}]

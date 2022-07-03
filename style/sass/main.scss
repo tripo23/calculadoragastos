@@ -22,11 +22,17 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
 }
 
+#contenedorHeader {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+}
 
 /* Mixin de contenedor principal */
 
@@ -44,19 +50,20 @@ input[type=number] {
     background-color: #46AF75;
 }
 
-.mainContainer--balance, .mainContainer--login  {
+.mainContainer--balance, .mainContainer--login {
     @include mainContainer;
     background-color: #05668D;
     border-radius: 0 0 30% 30%;
     text-align: center;
 }
 
-.mainContainer--login {
+.mainContainer--login  {
     height: 50%;
     h2, h3 {
         color: white;
     }
 }
+
 
 /* Mixin containers */
 @mixin divContenedor {
@@ -263,14 +270,28 @@ input[type=number] {
     font-size: 0.8em;
 }
 
-.inputsForm,
-.selectForm {
+
+@mixin select {
     height: 3vh;
     font-size: 0.8em;
     background-color: rgba(0, 0, 0, 0);
-    ;
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+}
+
+.selectForm {
+    @include select;
+}
+
+.selectForm--mes {
+    @include select;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    margin: auto;
+}
+
+.inputsForm {
+    @include select;
 }
 
 .tituloSeccion {

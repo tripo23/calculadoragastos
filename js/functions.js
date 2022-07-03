@@ -1,13 +1,24 @@
 /* Función para rellenar los select */
-const populateSelect = (arreglo, select) => {
-    for (const c of arreglo) {
+const populateSelect = async (arreglo, select) => {
+    const json = await getData(arreglo);
+    for (const c of json) {
         let option = document.createElement("option");
         option.value = c.value;
         option.textContent = c.text;
         select.appendChild(option);
     }
+
+    if (arreglo == "meses") {
+        select.value = mesActual();
+    } 
 }
 
+/* Traigo json Local y lo parseo */
+const getData = async (jsonFile) => {
+    const resp = await fetch(`/json/${jsonFile}.json`);
+    const data = await resp.json();
+    return data;
+}
 
 /* Obtengo la fecha de hoy y autocompleto el input fecha */
 const fechaHoy = (input) => {
@@ -21,7 +32,6 @@ const fechaHoy = (input) => {
 }
 
  /* Mes actual */
-
  const mesActual = () => {
     let today = new Date();
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -39,7 +49,6 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, m
     array = arrayPrincipal.filter((e) => e.tipo.includes(tipo) && e.fecha.includes(fechaBusqueda));
     
     for (const t of array) {
-        console.log(t.fecha);
         agrupador += parseFloat(t.monto);
     }
 
@@ -56,6 +65,16 @@ const link = (boton, destino) => {
 
 /* Función para calcular cuotas */
 const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFixed(2));
+
+
+/* Me traigo el valor actual del dolar blue */
+
+const dolarBlue = async (label) => { //hago que la función sea asincrónica
+    const resp = await fetch('https://api.bluelytics.com.ar/v2/latest') // hago el fetch con el await, y guardo la respuesta en resp
+    const data = await resp.json(); //parseo resp, y lo guardo en data
+    label.innerText = `Dólar blue promedio $: ${data.blue.value_avg.toString()}`;
+}
+
 
 
 /* SALUDO INICIAL */
@@ -86,5 +105,7 @@ export {
     mostrarSumaTransaccion,
     link,
     calculadoraDeCuotas,
-    mesActual
+    mesActual,
+    dolarBlue,
+    getData
 };

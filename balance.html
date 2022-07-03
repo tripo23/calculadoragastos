@@ -20,9 +20,12 @@
 
 <body>
     <main class="mainContainer--balance">
-        <select id="selectorMes" required class="selectForm">
-        </select>
-        <h3 class="tituloSeccion">Balance</h3>
+        <div id="contenedorHeader">
+            <span></span>
+            <h3 class="tituloSeccion">Balance</h3>
+            <select id="selectorMes" class="selectForm--mes" required></select>
+            <span></span>
+        </div>
 
         <div class="divContenedor--balance">
             
@@ -61,7 +64,7 @@
                 </div>
             </div>
 
-
+            <label id="lblDolar" class="labelsForm"></label>
 
         </div>
 
