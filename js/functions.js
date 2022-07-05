@@ -6,13 +6,11 @@ const populateSelect = async (apiID, select) => {
         option.value = c.value;
         option.textContent = c.text;
         select.appendChild(option);
-        //console.log(select.includes("meses"));
     }
 
-//     if (select.includes("meses")) {
-//         console.log("incluye meses");
-//         select.value = mesActual();
-//     } 
+    if (apiID === "62c4c5904bccf21c2ecf536c") {
+        select.value = mesActual();
+    } 
  }
 
 /* Traigo json Local y lo parseo */

@@ -29,7 +29,7 @@ let lblDolar = document.getElementById("lblDolar");
 let apiMeses = "62c4c5904bccf21c2ecf536c";
 
 /* Completo los meses en el select, y asigno el mes actual como valor por default */
-populateSelect(apiMeses, selectMeses)
+populateSelect(apiMeses, selectMeses);
 
 
 /* Me traigo las transacciones guardadas en el localStorage */
