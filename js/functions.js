@@ -1,22 +1,37 @@
 /* Función para rellenar los select */
-const populateSelect = async (arreglo, select) => {
-    const json = await getData(arreglo);
+const populateSelect = async (apiID, select) => {
+    const json = await getData(apiID);
     for (const c of json) {
         let option = document.createElement("option");
         option.value = c.value;
         option.textContent = c.text;
         select.appendChild(option);
+        //console.log(select.includes("meses"));
     }
 
-    if (arreglo == "meses") {
-        select.value = mesActual();
-    } 
-}
+//     if (select.includes("meses")) {
+//         console.log("incluye meses");
+//         select.value = mesActual();
+//     } 
+ }
 
 /* Traigo json Local y lo parseo */
-const getData = async (jsonFile) => {
+const getDataLocal = async (jsonFile) => {
     const resp = await fetch(`/json/${jsonFile}.json`);
     const data = await resp.json();
+    return data;
+}
+
+/* Traigo json externo y lo parseo */
+const getData = async (apiID) => {
+    const resp = await fetch(`https://api.jsonbin.io/v3/b/${apiID}`, {
+        headers: {
+            "X-Master-Key": '$2b$10$/d6FWxUERnGDLYwU150y0ekj49kjrOZbMTQ0UzH2vj7Sx2xkVoGfS',
+            "X-Bin-Meta": false
+        }    
+    });
+    const data = await resp.json();
+    console.log(data);
     return data;
 }
 
@@ -72,7 +87,7 @@ const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFix
 const dolarBlue = async (label) => { //hago que la función sea asincrónica
     const resp = await fetch('https://api.bluelytics.com.ar/v2/latest') // hago el fetch con el await, y guardo la respuesta en resp
     const data = await resp.json(); //parseo resp, y lo guardo en data
-    label.innerText = `Dólar blue promedio $: ${data.blue.value_avg.toString()}`;
+    label.innerText = `Dólar blue venta $: ${data.blue.value_sell.toString()}`;
 }
 
 

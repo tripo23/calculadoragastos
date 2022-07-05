@@ -20,6 +20,8 @@ let inputCuotas = document.getElementById("cuotas");
 let lblMonto = document.getElementById("lblMonto");
 let lblMontoCuota = document.getElementById("lblMontoCuota");
 let inputMontoCuota = document.getElementById("valCuota");
+let apiGastos = "62c4c0c64bccf21c2ecf4b68";
+let apiMP = "62c4c5a54bccf21c2ecf5393";
 
 
 inputMonto.focus();
@@ -59,9 +61,8 @@ inputMonto.onchange = () => {
 }
 
 /* Populo los select con los array */
-
-populateSelect("categoriasGastos", listCategoria);
-populateSelect("mediosDePago", listMpago);
+populateSelect(apiGastos, listCategoria);
+populateSelect(apiMP, listMpago);
 fechaHoy(inputFecha);
 
 
