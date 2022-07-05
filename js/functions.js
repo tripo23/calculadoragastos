@@ -9,6 +9,7 @@ const populateSelect = async (apiID, select) => {
     }
 
     if (apiID === "62c4c5904bccf21c2ecf536c") {
+        console.log("es el select de meses");
         select.value = mesActual();
     } 
  }
@@ -29,7 +30,6 @@ const getData = async (apiID) => {
         }    
     });
     const data = await resp.json();
-    console.log(data);
     return data;
 }
 
