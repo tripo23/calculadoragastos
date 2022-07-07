@@ -39,13 +39,14 @@ function validarFormulario(event, formulario, tipo, fecha, descripcion, categori
     // }).showToast();
 
     Swal.fire({
-        title: `Transacción agregada!`,
-        text:`¿Querés agregar otro ${tipo}?`,
+        title: `¡Listo!`,
+        text:`¿Querés añadir otro ${tipo}?`,
         icon:'success',
         showCloseButton: true,
         showCancelButton: true,
-        confirmButtonText: '👍 Sip!',
-        cancelButtonText: '🙅‍♂️ Nop',
+        cancelButtonText: 'Ir al inicio',
+        confirmButtonText: 'Sí, agregar',
+        reverseButtons: true
     }).then((result) => {
         if (!result.isConfirmed) {
             window.location.href='balance.html'

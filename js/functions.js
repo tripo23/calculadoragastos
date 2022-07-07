@@ -59,7 +59,7 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, m
     /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO */
     const fechaBusqueda = ("2022-"+mes.toString()).toString();
     
-    array = arrayPrincipal.filter((e) => (e.tipo.includes(tipo) && e.fecha.includes(fechaBusqueda)));
+    array = arrayPrincipal.filter((e) => (e.tipo.toLowerCase().includes(tipo) && e.fecha.includes(fechaBusqueda)));
     
     for (const t of array) {
         agrupador += parseFloat(t.monto);
@@ -85,7 +85,7 @@ const calculadoraDeCuotas = (monto, cuotas) => parseFloat((monto / cuotas).toFix
 const dolarBlue = async (label) => { //hago que la función sea asincrónica
     const resp = await fetch('https://api.bluelytics.com.ar/v2/latest') // hago el fetch con el await, y guardo la respuesta en resp
     const data = await resp.json(); //parseo resp, y lo guardo en data
-    label.innerText = `Dólar blue venta $: ${data.blue.value_sell.toString()}`;
+    label.innerText = `Dólar blue venta: $${data.blue.value_sell.toString()}`;
 }
 
 

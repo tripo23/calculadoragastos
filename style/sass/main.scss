@@ -22,7 +22,6 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
@@ -50,6 +49,12 @@ input[type=number] {
     background-color: #46AF75;
 }
 
+.mainContainer--movimientos {
+    @include mainContainer;
+    background-color: #05668D;
+    overflow-y: scroll;
+}
+
 .mainContainer--balance, .mainContainer--login {
     @include mainContainer;
     background-color: #05668D;
@@ -71,6 +76,13 @@ input[type=number] {
     align-items: center;
     min-height: 50vh;
     height: 100%;
+}
+
+.divContenedor--movimientos {
+    background-color: white;
+    border-radius: 15px 15px 0 0;
+    padding: 3vw;
+    text-align: center;
 }
 
 .divContenedor--balance,
@@ -298,7 +310,7 @@ input[type=number] {
     padding: 15px;
     color: #F5F5F5;
     text-align: center;
-
+    font-size: 1.17em;
 }
 
 /* The Modal (background) */
@@ -409,4 +421,7 @@ input[type=number] {
     justify-items: center;
 }
 
-
+#tablaMovimientos {
+    min-height: 50vh;
+    height: 100%;
+}

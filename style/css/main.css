@@ -36,6 +36,11 @@ input[type=number] {
   height: 100%;
   background-color: #46AF75; }
 
+.mainContainer--movimientos {
+  height: 100%;
+  background-color: #05668D;
+  overflow-y: scroll; }
+
 .mainContainer--balance, .mainContainer--login {
   height: 100%;
   background-color: #05668D;
@@ -48,6 +53,12 @@ input[type=number] {
     color: white; }
 
 /* Mixin containers */
+.divContenedor--movimientos {
+  background-color: white;
+  border-radius: 15px 15px 0 0;
+  padding: 3vw;
+  text-align: center; }
+
 .divContenedor--balance,
 .divContenedor--login {
   display: grid;
@@ -301,7 +312,8 @@ input[type=number] {
 .tituloSeccion {
   padding: 15px;
   color: #F5F5F5;
-  text-align: center; }
+  text-align: center;
+  font-size: 1.17em; }
 
 /* The Modal (background) */
 .modal {
@@ -393,3 +405,7 @@ input[type=number] {
   align-items: center;
   justify-content: center;
   justify-items: center; }
+
+#tablaMovimientos {
+  min-height: 50vh;
+  height: 100%; }
