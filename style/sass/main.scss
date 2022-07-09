@@ -55,7 +55,15 @@ input[type=number] {
     overflow-y: scroll;
 }
 
-.mainContainer--balance, .mainContainer--login {
+.mainContainer--balance {
+    @include mainContainer;
+    background-color: #05668D;
+    //border-radius: 0 0 30% 30%;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.mainContainer--login {
     @include mainContainer;
     background-color: #05668D;
     border-radius: 0 0 30% 30%;
@@ -79,13 +87,21 @@ input[type=number] {
 }
 
 .divContenedor--movimientos {
-    background-color: white;
-    border-radius: 15px 15px 0 0;
-    padding: 3vw;
+    background-color: #F5F5F5;
+    //border-radius: 15px 15px 0 0;
+    padding: 1vw 3vw 10vw 3vw;
     text-align: center;
 }
 
-.divContenedor--balance,
+.divContenedor--balance{
+    @include divContenedor;
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 0.5fr;
+    justify-items: center;
+    padding-bottom: 3vh;
+}
+
 .divContenedor--login {
     @include divContenedor;
     grid-template-columns: 1fr;
@@ -422,6 +438,42 @@ input[type=number] {
 }
 
 #tablaMovimientos {
+    border-radius: 15px;
+    background-color: #F5F5F5;
+    padding: 1vh 0;
     min-height: 50vh;
     height: 100%;
+    width: 80vw;
+    margin: 0 auto;
+    //filter: drop-shadow(-1px -1px 6px #a8a8a882);
+    overflow-x: scroll;
+}
+
+.divider {
+    display: flex;
+    background-color: #F5F5F5;
+    padding: 2vh 0 1vh 0vw;
+    justify-content: center;
+    align-items: baseline;
+
+    label {
+        padding: 0.5vw;
+        color: black;
+    }
+
+    .seeAll {
+        font-size: 0.7em;
+    }
+}
+
+.tipoGasto {
+    color: red;
+}
+
+.tipoIngreso {
+    color: green;
+}
+
+.tipoAhorro {
+    color: blue;
 }
