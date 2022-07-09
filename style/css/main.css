@@ -451,3 +451,19 @@ input[type=number] {
 
 .tipoAhorro {
   color: blue; }
+
+#bodyLogin {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5; }
+  #bodyLogin label {
+    color: black; }
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px; }
+
+#botonSignIn {
+  margin-top: 2vh; }

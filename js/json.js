@@ -1,11 +1,41 @@
-let req = new XMLHttpRequest();
+import {
+  mostrarSumaTransaccion,
+  populateSelect,
+  link,
+  dolarBlue,
+  getData,
+  postData
+} from "./functions.js";
+let arrayTest = [
+  {
+      value: "sueldo",
+      text: "Sueldo"
+  }, 
 
-req.onreadystatechange = () => {
-  if (req.readyState == XMLHttpRequest.DONE) {
-    console.log(req.responseText);
+  {
+      value: "devoluciones",
+      text: "Devoluciones"
+  },
+
+  {
+      value: "aguinaldo",
+      text: "Aguinaldo"
+  },
+  
+  {
+      value: "bono",
+      text: "Bono"
+  },
+
+  {
+      value: "otro",
+      text: "Otros"
   }
-};
+];
+let jsonTest = JSON.stringify(arrayTest);
 
-req.open("GET", "https://api.jsonbin.io/v3/b/62c0b1ee449a1f3821298256/1>", true);
-req.setRequestHeader("X-Master-Key", "$2b$10$/d6FWxUERnGDLYwU150y0ekj49kjrOZbMTQ0UzH2vj7Sx2xkVoGfS");
-req.send();
+//getData("62c4c0c64bccf21c2ecf4b68");
+
+const binID = postData (jsonTest,"jsonPrueba");
+console.log(binID);
+

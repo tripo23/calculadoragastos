@@ -1,3 +1,5 @@
+let apiMasterKey = '$2b$10$/d6FWxUERnGDLYwU150y0ekj49kjrOZbMTQ0UzH2vj7Sx2xkVoGfS';
+
 /* Función para rellenar los select */
 const populateSelect = async (apiID, select) => {
     const json = await getData(apiID);
@@ -25,13 +27,29 @@ const getDataLocal = async (jsonFile) => {
 const getData = async (apiID) => {
     const resp = await fetch(`https://api.jsonbin.io/v3/b/${apiID}`, {
         headers: {
-            "X-Master-Key": '$2b$10$/d6FWxUERnGDLYwU150y0ekj49kjrOZbMTQ0UzH2vj7Sx2xkVoGfS',
+            "X-Master-Key": apiMasterKey,
             "X-Bin-Meta": false
         }    
     });
     const data = await resp.json();
     return data;
 }
+
+/* Post Data to Json */
+const postData = async (json,nombre) => {
+    const resp = await fetch("https://api.jsonbin.io/v3/b", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": apiMasterKey,
+          "X-Bin-Name": nombre,
+        },
+        body: json,
+        cache: 'default'
+      });
+      return resp.json();    
+}
+
 
 /* Obtengo la fecha de hoy y autocompleto el input fecha */
 const fechaHoy = (input) => {
@@ -120,5 +138,6 @@ export {
     calculadoraDeCuotas,
     mesActual,
     dolarBlue,
-    getData
+    getData,
+    postData
 };
