@@ -57,45 +57,45 @@ selectMeses.onchange = () => {
 link(agregarGasto, "ingresarGasto.html");
 link(agregarIngreso, "ingresos.html");
 
+//Muestro la cotización del blue
 dolarBlue(lblDolar);
 
 // Traigo y armo la tabla de los últimos 10 movimientos
 Array.prototype.reverse.call(transacciones);
 
-if (transacciones.lenght > 0) {
-    console.log("hay data");
-} else {
+// Si hay transacciones populo la tabla
+if (transacciones.length > 0) {
+    transacciones.slice(0,10).forEach(transaccion => {
+        let tr = document.createElement('tr');
+        tbody.appendChild(tr);
+        
+        tr.innerHTML= `<td>${transaccion.fecha}</td>`;
+        
+        // según el tipo de transacción, le asigno una clase distinta.
+        switch (transaccion.tipo.toLowerCase()) {
+            case "gasto":
+                tr.innerHTML+= `<td class="tipoGasto">${transaccion.categoria}</td>`    
+                break;
+            case "ingreso":
+                tr.innerHTML+= `<td class="tipoIngreso">${transaccion.categoria}</td>`
+                break;
+            case "ahorro":
+                tr.innerHTML+= `<td class="tipoAhorro">${transaccion.categoria}</td>`
+                break;
+            default:
+                break;
+        }
+    
+        tr.innerHTML+= `                   
+                        
+                        <td>${transaccion.descripcion}</td>
+                        <td>${transaccion.monto}</td>
+                      `;
+    });
+
+    // Si no hay transacciones, muestro un empty state.
+} else { 
     let tr = document.createElement('tr');
     tbody.appendChild(tr);
     tr.innerHTML= `<td colspan="4" style="color:grey">No hay movimientos por ahora. Añadí gastos, ingresos o ahorros desde el botón "+".</td>`;
 }
-
-transacciones.slice(0,10).forEach(transaccion => {
-    let tr = document.createElement('tr');
-    tbody.appendChild(tr);
-    
-    tr.innerHTML= `<td>${transaccion.fecha}</td>`;
-    
-    switch (transaccion.tipo.toLowerCase()) {
-        case "gasto":
-            tr.innerHTML+= `<td class="tipoGasto">${transaccion.categoria}</td>`    
-            break;
-        case "ingreso":
-            tr.innerHTML+= `<td class="tipoIngreso">${transaccion.categoria}</td>`
-            break;
-        case "ahorro":
-            tr.innerHTML+= `<td class="tipoAhorro">${transaccion.categoria}</td>`
-            break;
-        default:
-            break;
-    }
-
-    tr.innerHTML+= `                   
-                    
-                    <td>${transaccion.descripcion}</td>
-                    <td>${transaccion.monto}</td>
-                  `;
-       
-    
-    //document.getElementsByClassName("tipo")
-});
