@@ -58,7 +58,7 @@ selectMeses.onchange = () => {
 }
 
 // Links para los botones "+"
-link(agregarGasto, "ingresarGasto.html");
+link(agregarGasto, "gastos.html");
 link(agregarIngreso, "ingresos.html");
 
 //Muestro la cotización del blue
@@ -93,7 +93,7 @@ if (transacciones.length > 0) {
         tr.innerHTML+= `                   
                         
                         <td>${transaccion.descripcion}</td>
-                        <td>${transaccion.monto}</td>
+                        <td>$${transaccion.monto}</td>
                       `;
     });
 

@@ -21,6 +21,6 @@ transacciones.forEach(transaccion => {
                     <td>${transaccion.tipo}</td>
                     <td>${transaccion.categoria}</td>
                     <td>${transaccion.descripcion}</td>
-                    <td>${transaccion.monto}</td>
+                    <td>$${transaccion.monto}</td>
                   `
 });
