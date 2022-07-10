@@ -3,7 +3,9 @@ import {
     populateSelect,
     link,
     dolarBlue,
+    getData
 } from "./functions.js";
+import { usrApiID } from "./users.js";
 
 
 let transacciones;
@@ -32,8 +34,10 @@ let apiMeses = "62c4c5904bccf21c2ecf536c";
 populateSelect(apiMeses, selectMeses);
 
 
-/* Me traigo las transacciones guardadas en el localStorage */
-transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+/* Me traigo las transacciones guardadas en el JSON */
+//transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+transacciones = await getData(usrApiID());
+
 
 /* Calculo los totales, según el tipo de transacción */
 const calcularTotales = () => {

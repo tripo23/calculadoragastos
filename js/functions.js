@@ -50,6 +50,21 @@ const postData = async (json,nombre) => {
       return resp.json();    
 }
 
+/* Put Data to Json */
+const putData = async (json,apiID) => {
+    const resp = await fetch(`https://api.jsonbin.io/v3/b/${apiID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": apiMasterKey,
+          "X-Bin-Versioning": false
+        },
+        body: json,
+        cache: 'default'
+      });
+      return resp.json();    
+}
+
 
 /* Obtengo la fecha de hoy y autocompleto el input fecha */
 const fechaHoy = (input) => {
@@ -139,5 +154,6 @@ export {
     mesActual,
     dolarBlue,
     getData,
-    postData
+    postData,
+    putData
 };

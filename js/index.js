@@ -1,13 +1,16 @@
+const formLogin = document.getElementById("formLogin");
+let userInput = document.getElementById("loginUsuario");
+let username = "";
 
-let username = document.getElementById("loginUsuario");
-
-
-const validarFormulario = (e) => {
-    console.log("intento validar");
-    e.preventDefault();
-    sessionStorage.setItem("user", username.value);
-    window.location.href = "balance.html";
+formLogin.onsubmit = () => {
+    validarFormulario(event);
 }
 
-document.getElementById("formLogin").addEventListener("submit", validarFormulario);
+const validarFormulario = (e) => {
+    console.log("entro a la función del form");
+    e.preventDefault();
+    sessionStorage.setItem("user", userInput.value);
+    username = userInput.value;
+    window.location.href = "balance.html";
+}
 

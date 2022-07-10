@@ -1,26 +1,29 @@
 import {
     Transaccion
 } from './constTransaccion.js';
+import { getData, putData } from './functions.js';
+import { usrApiID } from './users.js';
 
-
-//let transaccionesAnteriores;
-//transaccionesAnteriores = JSON.parse(localStorage.getItem("transacciones"));
-
-
-function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp) {
+async function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp) {
 
     event.preventDefault();
 
-    /* guardo en transacciones lo que haya en el local storage, si no hay nada, transacciones queda vacío. */
-    const transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+    /* guardo en transacciones lo que haya en el JSON, si no hay nada, transacciones queda vacío. */
+    //const transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+    const transacciones = await getData(usrApiID());
+    
 
     // Acá guardo todo en el array
     transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp));
 
     /* subo todo al local storage */
-    localStorage.setItem("transacciones", JSON.stringify(transacciones));
+    //localStorage.setItem("transacciones", JSON.stringify(transacciones));
+    
+    //convierto array en json
+    const transaccionesJson = JSON.stringify(transacciones); 
 
-    console.log(JSON.stringify(transacciones));
+    /* Actualizo el json con la nueva data */
+    putData(transaccionesJson, usrApiID());
 
     // Limpio el form
     formulario.reset();
