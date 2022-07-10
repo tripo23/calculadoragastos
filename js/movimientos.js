@@ -1,15 +1,18 @@
-let transacciones;
+import { getData } from "./functions.js";
+import { usrApiID } from "./users.js";
+
+
 let tbody = document.getElementById("tbody");
 
-/* Me traigo las transacciones guardadas en el localStorage */
-transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+/* Me traigo las transacciones guardadas */
+//transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+let transacciones = await getData(usrApiID());
 
+// Invierto el orden así la más nueva, se muestra primero.
 Array.prototype.reverse.call(transacciones);
 
-console.log(transacciones[0].tipo);
-
+// Populo la tabla.
 transacciones.forEach(transaccion => {
-    console.log(transaccion);
 
     let tr = document.createElement('tr');
     tbody.appendChild(tr);

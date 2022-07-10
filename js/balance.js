@@ -64,10 +64,10 @@ link(agregarIngreso, "ingresos.html");
 //Muestro la cotización del blue
 dolarBlue(lblDolar);
 
-// Traigo y armo la tabla de los últimos 10 movimientos
+// Invierto el orden así la más nueva, se muestra primero.
 Array.prototype.reverse.call(transacciones);
 
-// Si hay transacciones populo la tabla
+// Si hay transacciones populo la tabla con las últimas 10.
 if (transacciones.length > 0) {
     transacciones.slice(0,10).forEach(transaccion => {
         let tr = document.createElement('tr');
