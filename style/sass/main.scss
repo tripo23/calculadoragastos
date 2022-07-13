@@ -49,6 +49,11 @@ input[type=number] {
     background-color: #46AF75;
 }
 
+.mainContainer--ahorros {
+    @include mainContainer;
+    background-color: #229FBF;
+}
+
 .mainContainer--movimientos {
     @include mainContainer;
     background-color: #05668D;
@@ -258,6 +263,15 @@ input[type=number] {
 .btn--sendIngreso {
     @include btn;
     background-color: #46AF75;
+    color: #F5F5F5;
+    grid-row: 15/17;
+    height: 70%;
+    cursor: pointer;
+}
+
+.btn--sendAhorro {
+    @include btn;
+    background-color: #229FBF;
     color: #F5F5F5;
     grid-row: 15/17;
     height: 70%;
@@ -496,4 +510,11 @@ input[type=number] {
 
 #botonSignIn {
     margin-top: 2vh;
+}
+
+.radios {
+    display: block;
+    label {
+        padding: 0 1vw 0 0.5vw;
+    }
 }

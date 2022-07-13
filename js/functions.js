@@ -121,29 +121,25 @@ const dolarBlue = async (label) => { //hago que la función sea asincrónica
     label.innerText = `Dólar blue venta: $${data.blue.value_sell.toString()}`;
 }
 
+const arsToUsd = async (ars) => {
+    const resp = await fetch('https://api.bluelytics.com.ar/v2/latest') 
+    const data = await resp.json();
+    const usd = parseFloat((parseInt(ars) / parseInt(data.blue.value_buy)).toFixed(2));
+    return usd;
+} 
 
 
-/* SALUDO INICIAL */
-
-// /* Función para saludar de acuerdo a la hora del día */
-// const saludar = document.getElementById("saludo");
-// const hora = new Date().getHours();
-// const saludos = ["¡Buen día", "¡Buenas tardes", "¡Buenas noches"];
-// let saludoInicial = "";
-
-// if (hora < 12) saludoInicial = saludos[0];
-// else if (hora < 18) saludoInicial = saludos[1];
-// else saludoInicial = saludos[2];
-
-// usernameRemote = sessionStorage.getItem("user");
-
-// // Acá cambio el label para el saludo al usuario
-// if (usernameRemote != "") {
-
-//     // saludar.innerHTML = `${saludoInicial} ${usernameRemote}!`;
-// } else {
-
-// }
+/* Con esto veo qué radio button está seleccionado */
+const validarRadioButton = (radio) => {
+    let monedaElegida = "";
+    for (const rb of radio) {
+        if (rb.checked) {
+            monedaElegida = rb.value;
+        }  
+    }
+    console.log(monedaElegida);
+    return monedaElegida;
+}
 
 export {
     populateSelect,
@@ -155,5 +151,7 @@ export {
     dolarBlue,
     getData,
     postData,
-    putData
+    putData,
+    arsToUsd,
+    validarRadioButton
 };

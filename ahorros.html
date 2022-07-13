@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorros</title>
+    <link rel="stylesheet" href="./style/css/main.css">
+
+    <!-- Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <main class="mainContainer--ahorros" id="containerIngresarIngreso">
+        <div class="header">
+            <button class="btn--back" onclick="window.location.href='balance.html'">
+                <</button> <h3 class="tituloSeccion">Ahorros</h3>
+        </div>
+
+        <form class="divContenedor--gastos" id="ingresarContainerIngreso">
+
+            <label id="lblfechaIngreso" for="fechaIngreso" class="labelsForm">¿Cuándo fue el ahorro?</label>
+            <input id="fechaIngreso" type="date">
+
+            <label id="lblMontoIngreso" for="monto" class="labelsForm">Monto invertido en ARS</label>
+            <input id="montoIngreso" type="number" placeholder="" required class="inputsForm">
+
+            <label id="lblDescripcionIngreso" for="descripcion" class="labelsForm">Descripción</label>
+            <input id="descripcionIngreso" type="text" placeholder="" required class="inputsForm">
+            
+            <label id="lblCategoriaAhorro" for="categoria" class="labelsForm">Categoría</label>
+                <select id="categoriaAhorro" required class="selectForm">
+                    <option value="Inversión">Inversiones</option>
+                    <option value="Compra moneda extranjera">Compra moneda extranjera</option>
+                </select>
+
+            <label id="lblMoneda" class="labelsForm">¿Cuánto vas a ahorrar?</label>
+            <div class="radios">
+                <input type="radio" name="moneda" id="radioARS" value="ars" checked="checked" >
+                <label for="radioARS" class="labelsForm">ARS</label>
+                <input type="radio" name="moneda" id="radioUSD" value="usd">
+                <label for="radioUSD" class="labelsForm">USD</label>
+            </div>
+
+            <input id="ahorroEsperado" type="text" placeholder="" required class="inputsForm">
+
+
+
+            
+
+
+            <input class="btn--sendAhorro" type="submit" value="Listo">
+        </form>
+
+        </div>
+
+    </main>
+    <script type="module" src="./js/ahorros.js"></script>
+    <script type="module" src="./js/functions.js"></script>
+    <script type="module" src="./js/categorias.js"></script>
+</body>
+
+</html>

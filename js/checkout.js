@@ -4,7 +4,7 @@ import {
 import { getData, putData } from './functions.js';
 import { usrApiID } from './users.js';
 
-async function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp) {
+async function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp, montoAhorrado, moneda) {
 
     event.preventDefault();
 
@@ -14,7 +14,7 @@ async function validarFormulario(event, formulario, tipo, fecha, descripcion, ca
     
 
     // Acá guardo todo en el array
-    transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp));
+    transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp, montoAhorrado, moneda));
 
     /* subo todo al local storage */
     //localStorage.setItem("transacciones", JSON.stringify(transacciones));

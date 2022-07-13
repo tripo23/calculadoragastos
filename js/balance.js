@@ -60,6 +60,7 @@ selectMeses.onchange = () => {
 // Links para los botones "+"
 link(agregarGasto, "gastos.html");
 link(agregarIngreso, "ingresos.html");
+link(agregarAhorro, "ahorros.html");
 
 //Muestro la cotización del blue
 dolarBlue(lblDolar);
