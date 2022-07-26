@@ -33,7 +33,7 @@ const populateSelect = async (apiID, select) => {
 
 /* Traigo json Local y lo parseo */
 const getDataLocal = async (jsonFile) => {
-    const resp = await fetch(`/json/${jsonFile}.json`);
+    const resp = await fetch(`./json/${jsonFile}.json`);
     const data = await resp.json();
     return data;
 }

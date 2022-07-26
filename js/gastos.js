@@ -35,7 +35,7 @@ let fechaFin;
 
 
 
-/* Populo los select con los array */
+/* Populo los select */
 populateSelect(apiGastos, listCategoria);
 populateSelect(apiMP, listMpago);
 fechaHoy(inputFecha);
