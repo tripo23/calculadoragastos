@@ -4,21 +4,17 @@ import {
 import { getData, putData } from './functions.js';
 import { usrApiID } from './users.js';
 
-async function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp, montoAhorrado, moneda) {
+async function validarFormulario(event, formulario, tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp, montoAhorrado, moneda, fechaFin, fechaInicio) {
 
     event.preventDefault();
 
-    /* guardo en transacciones lo que haya en el JSON, si no hay nada, transacciones queda vacío. */
-    //const transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
+    /* Me traigo a transacciones lo que haya guardado en el json en la nube */
     const transacciones = await getData(usrApiID());
     
 
     // Acá guardo todo en el array
-    transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp, montoAhorrado, moneda));
-
-    /* subo todo al local storage */
-    //localStorage.setItem("transacciones", JSON.stringify(transacciones));
-    
+    transacciones.push(new Transaccion(tipo, fecha, descripcion, categoria, metodoDePago, monto, cuotas, montoCuota, timestamp, montoAhorrado, moneda, fechaFin, fechaInicio));
+ 
     //convierto array en json
     const transaccionesJson = JSON.stringify(transacciones); 
 

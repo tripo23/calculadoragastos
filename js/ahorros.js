@@ -22,6 +22,7 @@ let categoriaAhorro = document.getElementById("categoriaAhorro");
 let ars = document.getElementById("radioARS");
 let usd = document.getElementById("radioUSD");
 let moneda = validarRadioButton(radioButtons);
+let fechaMovimiento;
 
 const ConvertirAUsd = () => {
     moneda = validarRadioButton(radioButtons);
@@ -54,5 +55,9 @@ categoriaAhorro.onchange = () => {
 /* Cuando el usuario le da "CONFIRMAR", guardo toda la info en mi array principal de transacciones y en el localStorage */
 formularioTransaccion.onsubmit = () => {
 
-    validarFormulario(event, formularioTransaccion, "ahorro", inputFecha.value, inputDescripcion.value, listCategoria.value, "", inputMonto.value, "", "", new Date(), ahorroEsperado.value, moneda);
+    fechaMovimiento = new Date(inputFecha.value);
+    fechaMovimiento.setDate(fechaMovimiento.getDate()+1);
+    fechaMovimiento.setHours(0,0,0,0);
+    
+    validarFormulario(event, formularioTransaccion, "ahorro", fechaMovimiento, inputDescripcion.value, listCategoria.value, "", inputMonto.value, "", "", new Date(), ahorroEsperado.value, moneda,"","");
 }

@@ -1,5 +1,6 @@
 let apiMasterKey = '$2b$10$/d6FWxUERnGDLYwU150y0ekj49kjrOZbMTQ0UzH2vj7Sx2xkVoGfS';
 
+
 /* Función para rellenar los select */
 const populateSelect = async (apiID, select) => {
     const json = await getData(apiID);
@@ -15,6 +16,20 @@ const populateSelect = async (apiID, select) => {
         select.value = mesActual();
     } 
  }
+
+ const populateMonth = async (arreglo, select) => {
+    const json = await getDataLocal(arreglo);
+    for (const c of json) {
+        let option = document.createElement("option");
+        option.value = c.value;
+        option.textContent = c.text;
+        select.appendChild(option);
+    }
+
+    if (arreglo == "meses") {
+        select.value = mesActual();
+    } 
+}
 
 /* Traigo json Local y lo parseo */
 const getDataLocal = async (jsonFile) => {
@@ -77,6 +92,17 @@ const fechaHoy = (input) => {
     input.defaultValue = today;
 }
 
+/* Autocompleto la fecha de cierre estimada de la TC */
+const fechaCierreTC = (input) => {
+    let today = new Date();
+    let dd = String(28); // harcodeo que cierra el 28.
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    input.defaultValue = today;
+}
+
  /* Mes actual */
  const mesActual = () => {
     let today = new Date();
@@ -86,16 +112,80 @@ const fechaHoy = (input) => {
 
 
 // Recorro las transacciones y sumo el total por tipo
+let fechaMesBalance = new Date ();
+let fbeom = new Date ();
 
 const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, mes) => {
-
-    /* ME TRAIGO SOLO LAS TRANSACCIONES DEL "TIPO" QUE VIENE POR PARÁMETRO */
-    const fechaBusqueda = ("2022-"+mes.toString()).toString();
     
-    array = arrayPrincipal.filter((e) => (e.tipo.toLowerCase().includes(tipo) && e.fecha.includes(fechaBusqueda)));
+    mes = parseInt(mes-1);
+    
+    fechaMesBalance.setMonth(mes);
+    fechaMesBalance.setDate(1);
+    fechaMesBalance.setHours(0,0,0,0);
+    
+    fbeom.setMonth(mes+1);
+    fbeom.setDate(0);
+    fbeom.setHours(0,0,0,0);
+    
+
+    // let arrayFecha = new Date(arrayPrincipal[0].fecha);
+    // let arrayFechaInicio = new Date(arrayPrincipal[0].fechaInicio);
+    // let arrayfechaFin = new Date(arrayPrincipal[0].fechaFin);
+
+
+    // console.log("fecha del array");
+    // console.log(arrayFecha);
+    // //console.log(arrayFecha.getTime());
+    // console.log("primer día del mes del balance");
+    // console.log(fechaMesBalance);
+    // //console.log(fechaMesBalance.getTime());
+    // console.log("último día del mes del balance");
+    // console.log(fbeom);
+    // //console.log(fbeom.getTime());
+    // console.log("primer día de la primera cuota");
+    // console.log(arrayFechaInicio);
+    // //console.log(arrayFechaInicio.getTime());
+    // console.log("último día de la última cuota");
+    // console.log(arrayfechaFin);
+    
+
+    // if ((arrayFecha.getTime() >= fechaMesBalance.getTime()) && (arrayFecha.getTime() <= fbeom.getTime()) && fechaMesBalance.getTime() <= fechaFin.getTime()) {
+    //     console.log("la fecha del array es mayor que la fecha del balance y menor que el fin de mes");
+    // } else {
+    //     console.log("nope");
+    // }
+    
+
+    array = arrayPrincipal.filter(e => {
+        
+        // para cash
+        if (e.metodoDePago === "ft" || e.metodoDePago == "") {
+            //1. Que matchee el tipo
+            //2. Que la fecha de transacción sea posterior o igual al primer día del mes del balance.
+            //3. Que la fecha de transacción sea anterior o igual al último día del mes del balance.
+            //4. Que la fecha del balance (1er día del mes) sea menor o igual que la fecha de la última cuota (en caso de diferido, o en caso de pago recurrente <tbd>)
+            return (e.tipo.toLowerCase().includes(tipo)) && (new Date(e.fecha).getTime() >= fechaMesBalance.getTime()) && (new Date(e.fecha).getTime() <= fbeom.getTime() && (fechaMesBalance.getTime() <= new Date (e.fechaFin).getTime() || e.fechaFin == ""));
+        } else {
+            // para tc
+            //1. Que matchee el tipo
+            //2. Que la fecha de última cuota sea posterior o igual al primer día del mes del balance. 
+            //3. Que la fecha de primera cuota sea anterior o igual al último día del mes del balance. 
+            
+            
+            return (e.tipo.toLowerCase().includes(tipo)) &&
+             (new Date(e.fechaFin).getTime() >= fechaMesBalance.getTime()) &&
+             (new Date(e.fechaInicio).getTime() <= fechaMesBalance.getTime());
+        }
+    });
+
+    
     
     for (const t of array) {
-        agrupador += parseFloat(t.monto);
+        if (t.metodoDePago === "ft" || t.metodoDePago == "" ) {
+            agrupador += parseFloat(t.monto);
+        } else {
+            agrupador += parseFloat(t.montoCuota);
+        }
     }
 
     label.innerText = "$ " + agrupador;
@@ -137,13 +227,44 @@ const validarRadioButton = (radio) => {
             monedaElegida = rb.value;
         }  
     }
-    console.log(monedaElegida);
     return monedaElegida;
+}
+
+const primeraCuota = (fechaMovimiento, fechaCierre) => {
+    let primera = new Date ()
+    if (fechaMovimiento.getTime() <= fechaCierre.getTime()) {
+        primera.setMonth(fechaMovimiento.getMonth() + 1);
+        
+    } else {
+        console.log("no entra en el próximo resumen");
+        primera.setMonth(fechaMovimiento.getMonth() + 2);
+    }
+    primera.setDate(1);
+    primera.setHours(0,0,0,0);
+    console.log("primera");
+    return primera;
+}
+
+const ultimaCuota = (fechaMovimiento, fechaCierre, qCuotas) => {
+    let ultima = new Date ()
+
+    if (fechaMovimiento.getTime() <= fechaCierre.getTime()) {
+        ultima.setMonth(fechaMovimiento.getMonth() + parseInt(qCuotas) + 1);
+
+    } else {
+        ultima.setMonth(fechaMovimiento.getMonth() + parseInt(qCuotas) + 2);
+    }
+    ultima.setDate(0);
+    ultima.setHours(0,0,0,0);
+
+    return ultima;
 }
 
 export {
     populateSelect,
+    populateMonth,
     fechaHoy,
+    fechaCierreTC,
     mostrarSumaTransaccion,
     link,
     calculadoraDeCuotas,
@@ -153,5 +274,7 @@ export {
     postData,
     putData,
     arsToUsd,
-    validarRadioButton
+    validarRadioButton,
+    primeraCuota,
+    ultimaCuota
 };

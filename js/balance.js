@@ -1,6 +1,6 @@
 import {
     mostrarSumaTransaccion,
-    populateSelect,
+    populateMonth,
     link,
     dolarBlue,
     getData
@@ -31,7 +31,7 @@ let lblDolar = document.getElementById("lblDolar");
 let apiMeses = "62c4c5904bccf21c2ecf536c";
 
 /* Completo los meses en el select, y asigno el mes actual como valor por default */
-populateSelect(apiMeses, selectMeses);
+populateMonth("meses", selectMeses);
 
 
 /* Me traigo las transacciones guardadas en el JSON */
@@ -73,8 +73,7 @@ if (transacciones.length > 0) {
     transacciones.slice(0,10).forEach(transaccion => {
         let tr = document.createElement('tr');
         tbody.appendChild(tr);
-        
-        tr.innerHTML= `<td>${transaccion.fecha}</td>`;
+        tr.innerHTML= `<td>${transaccion.fecha.slice(0,10)}</td>`;
         
         // según el tipo de transacción, le asigno una clase distinta.
         switch (transaccion.tipo.toLowerCase()) {

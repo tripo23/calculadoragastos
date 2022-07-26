@@ -1,7 +1,10 @@
 import {
     fechaHoy,
     populateSelect,
-    calculadoraDeCuotas,    
+    calculadoraDeCuotas,
+    ultimaCuota,    
+    primeraCuota,
+    fechaCierreTC
 } from './functions.js';
 
 import {
@@ -20,12 +23,25 @@ let inputCuotas = document.getElementById("cuotas");
 let lblMonto = document.getElementById("lblMonto");
 let lblMontoCuota = document.getElementById("lblMontoCuota");
 let inputMontoCuota = document.getElementById("valCuota");
+let inputFechaCierre = document.getElementById("fechaCierre");
+let lblFechaCierre = document.getElementById("lblFechaCierre");
 let apiGastos = "62c4c0c64bccf21c2ecf4b68";
 let apiMP = "62c4c5a54bccf21c2ecf5393";
+let fechaMovimiento;
+let fechaInicio;
+let fechaFin;
 
+
+
+
+
+/* Populo los select con los array */
+populateSelect(apiGastos, listCategoria);
+populateSelect(apiMP, listMpago);
+fechaHoy(inputFecha);
+fechaCierreTC(inputFechaCierre);
 
 inputMonto.focus();
-
 
 /* Si cambio el medio de pago a TC se habilitan las opciones de cuotas */
 listMpago.onchange = () => {
@@ -35,6 +51,8 @@ listMpago.onchange = () => {
         inputCuotas.style.display = "block";
         lblMontoCuota.style.display = "block";
         inputMontoCuota.style.display = "block";
+        lblFechaCierre.style.display = "block";
+        inputFechaCierre.style.display = "block";
 
     } else if (listMpago.value == "ft") {
         inputCuotas.value = 0;
@@ -44,6 +62,8 @@ listMpago.onchange = () => {
         inputCuotas.style.display = "none";
         lblMontoCuota.style.display = "none";
         inputMontoCuota.style.display = "none";
+        lblFechaCierre.style.display = "none";
+        inputFechaCierre.style.display = "none";
     }
 }
 
@@ -60,14 +80,27 @@ inputMonto.onchange = () => {
     }
 }
 
-/* Populo los select con los array */
-populateSelect(apiGastos, listCategoria);
-populateSelect(apiMP, listMpago);
-fechaHoy(inputFecha);
-
-
-
-/* Cuando el usuario le da "CONFIRMAR", guardo toda la info en mi array principal de transacciones y en el localStorage */
+/* Cuando el usuario le da "CONFIRMAR", guardo toda la info en mi array principal de transacciones */
 formularioTransaccion.onsubmit = () => {
-    validarFormulario(event, formularioTransaccion, "Gasto", inputFecha.value, inputDescripcion.value, listCategoria.value, listMpago.value, inputMonto.value, inputCuotas.value, inputMontoCuota.value, new Date(), "", "");
+
+    fechaMovimiento = new Date(inputFecha.value);
+    fechaMovimiento.setDate(fechaMovimiento.getDate()+1);
+    fechaMovimiento.setHours(0,0,0,0);
+    let fechaCierre = new Date (`${inputFechaCierre.value}T00:00:00`);
+
+    if (inputCuotas.value > 0) {
+
+        // Pago TC
+        console.log(fechaCierre);
+        fechaInicio = primeraCuota (fechaMovimiento, fechaCierre);
+        fechaFin = ultimaCuota(fechaMovimiento, fechaCierre, inputCuotas.value);
+
+        
+        validarFormulario(event, formularioTransaccion, "Gasto", fechaMovimiento, inputDescripcion.value, listCategoria.value, listMpago.value, inputMonto.value, inputCuotas.value, inputMontoCuota.value, new Date(), "", "", fechaFin, fechaInicio);
+
+    } else {
+        // Pago cash
+        validarFormulario(event, formularioTransaccion, "Gasto", fechaMovimiento, inputDescripcion.value, listCategoria.value, listMpago.value, inputMonto.value, inputCuotas.value, inputMontoCuota.value, new Date(), "", "", "","");
+    }
+  
 }

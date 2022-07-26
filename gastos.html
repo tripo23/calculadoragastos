@@ -49,11 +49,18 @@
                     <option value="" disabled></option>
                 </select>
 
-                <label id="lblCuotas" for="cuotas" style="display:none" class="labelsForm">Cantidad de cuotas</label>
-                <input id="cuotas" type="number" placeholder="" style="display:none" class="inputsForm">
+                <div class="cosasTC">
+                    <label id="lblCuotas" for="cuotas" style="display:none" class="labelsForm">Cantidad de cuotas</label>
+                    <input id="cuotas" type="number" placeholder="" style="display:none" class="inputsForm">
+    
+                    <label id="lblMontoCuota" for="montoCuota" style="display:none" class="labelsForm">Valor de la cuota</label>
+                    <input id="valCuota" type="number" disabled style="display:none" class="inputsForm">
 
-                <label id="lblMontoCuota" for="montoCuota" style="display:none" class="labelsForm">Valor de la cuota</label>
-                <input id="valCuota" type="number" disabled style="display:none" class="inputsForm">
+                    <label id="lblFechaCierre" for="fechaCierre" class="labelsForm" style="display:none">Cierre de la TC</label>
+                    <input id="fechaCierre" type="date" style="display:none">
+                </div>
+
+
 
                 <input class="btn--sendGasto" type="submit" value="Listo">    
         </form>
