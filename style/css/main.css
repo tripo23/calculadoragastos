@@ -67,6 +67,8 @@ input[type=number] {
   background-color: #F5F5F5;
   padding: 1vw 3vw 10vw 3vw;
   text-align: center; }
+  .divContenedor--movimientos input {
+    text-align: center; }
 
 .divContenedor--balance {
   display: grid;
@@ -106,7 +108,16 @@ input[type=number] {
     border-radius: 15px 15px 0 0;
     padding-bottom: 5vh; }
   .divContenedor--gastos {
-    padding: 4vw; } }
+    padding: 4vw; }
+  .cosasTC {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: start;
+    text-align: center; }
+    .cosasTC input {
+      max-width: 60px; } }
 
 /* desktop */
 @media screen and (min-width: 768px) {
@@ -118,7 +129,13 @@ input[type=number] {
   .divContenedor--login {
     background-color: #F5F5F5;
     border-radius: 15px 15px 0 0;
-    padding: 2vh 8vw; } }
+    padding: 2vh 8vw; }
+  .cosasTC {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: stretch; } }
 
 /* Mixin pastillas balance */
 .pastilla--balance {
@@ -491,10 +508,3 @@ input[type=number] {
   display: block; }
   .radios label {
     padding: 0 1vw 0 0.5vw; }
-
-.cosasTC {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-items: center; }

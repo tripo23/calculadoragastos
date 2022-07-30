@@ -39,7 +39,7 @@ let fechaFin;
 populateSelect(apiGastos, listCategoria);
 populateSelect(apiMP, listMpago);
 fechaHoy(inputFecha);
-fechaCierreTC(inputFechaCierre);
+fechaCierreTC(inputFechaCierre); // completo el select con fecha de cierre de la TC
 
 inputMonto.focus();
 
@@ -80,6 +80,12 @@ inputMonto.onchange = () => {
     }
 }
 
+inputFecha.onchange = () => {
+    let cierre = new Date (`${inputFecha.value}T00:00:00`);
+    fechaCierreTC(inputFechaCierre, cierre);
+    
+}
+
 /* Cuando el usuario le da "CONFIRMAR", guardo toda la info en mi array principal de transacciones */
 formularioTransaccion.onsubmit = () => {
 
@@ -91,11 +97,9 @@ formularioTransaccion.onsubmit = () => {
     if (inputCuotas.value > 0) {
 
         // Pago TC
-        console.log(fechaCierre);
         fechaInicio = primeraCuota (fechaMovimiento, fechaCierre);
         fechaFin = ultimaCuota(fechaMovimiento, fechaCierre, inputCuotas.value);
 
-        
         validarFormulario(event, formularioTransaccion, "Gasto", fechaMovimiento, inputDescripcion.value, listCategoria.value, listMpago.value, inputMonto.value, inputCuotas.value, inputMontoCuota.value, new Date(), "", "", fechaFin, fechaInicio);
 
     } else {

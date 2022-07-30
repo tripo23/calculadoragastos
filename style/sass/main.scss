@@ -96,6 +96,10 @@ input[type=number] {
     //border-radius: 15px 15px 0 0;
     padding: 1vw 3vw 10vw 3vw;
     text-align: center;
+
+    input {
+        text-align: center;
+    }
 }
 
 .divContenedor--balance{
@@ -136,6 +140,19 @@ input[type=number] {
     .divContenedor--gastos {
         padding: 4vw;
     }
+
+    .cosasTC {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        justify-items: start;
+        text-align: center;
+    
+        input {
+            max-width: 60px;
+        }
+    }
 }
 
 /* desktop */
@@ -151,6 +168,14 @@ input[type=number] {
         background-color: #F5F5F5;
         border-radius: 15px 15px 0 0;
         padding: 2vh 8vw;
+    }
+
+    .cosasTC {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        justify-items: stretch;
     }
 }
 
@@ -519,10 +544,3 @@ input[type=number] {
     }
 }
 
-.cosasTC {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    align-items: center;
-    justify-items: center;
-}

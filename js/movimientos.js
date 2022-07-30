@@ -1,22 +1,37 @@
-import { getData } from "./functions.js";
-import { usrApiID } from "./users.js";
+import {
+  getData,
+  populateSelect
+} from "./functions.js";
+import {
+  usrApiID
+} from "./users.js";
 
-
+let apiGastos = "62c4c0c64bccf21c2ecf4b68";
 let tbody = document.getElementById("tbody");
+let inputSearch = document.getElementById("searchDescripcion");
+let listCategorias = document.getElementById("selectCategorias");
+populateSelect(apiGastos, listCategorias);
 
 /* Me traigo las transacciones guardadas */
-//transacciones = JSON.parse(localStorage.getItem("transacciones")) || [];
 let transacciones = await getData(usrApiID());
 
 // Invierto el orden así la más nueva, se muestra primero.
-Array.prototype.reverse.call(transacciones);
+//Array.prototype.reverse.call(transacciones);
+
+//Agrego elemento "orden" basado en la fecha de la transacción
+transacciones.forEach(element => {
+    let orden = (new Date (element.fecha)).getTime();
+    element.orden = orden;
+});
+
+transacciones = transacciones.sort((a,b) => b.orden - a.orden);
 
 // Populo la tabla.
 transacciones.forEach(transaccion => {
 
-    let tr = document.createElement('tr');
-    tbody.appendChild(tr);
-    tr.innerHTML= `
+  let tr = document.createElement('tr');
+  tbody.appendChild(tr);
+  tr.innerHTML = `
                     <td>${transaccion.fecha.slice(0,10)}</td>
                     <td>${transaccion.tipo}</td>
                     <td>${transaccion.categoria}</td>
@@ -24,3 +39,32 @@ transacciones.forEach(transaccion => {
                     <td>$${transaccion.monto}</td>
                   `
 });
+
+listCategorias.onchange = () => {
+  filtroMovimientos(listCategorias, 2);
+}
+
+inputSearch.onkeyup = () => {
+  filtroMovimientos(inputSearch, 3);
+}
+
+
+const filtroMovimientos = (input, indexCol) => {
+  let filter, table, tr, td, i, txtValue;
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tablaMovimientos");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[indexCol];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}

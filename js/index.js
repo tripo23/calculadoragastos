@@ -9,7 +9,7 @@ formLogin.onsubmit = () => {
 const validarFormulario = (e) => {
     console.log("entro a la función del form");
     e.preventDefault();
-    sessionStorage.setItem("user", userInput.value);
+    localStorage.setItem("user", userInput.value);
     username = userInput.value;
     window.location.href = "balance.html";
 }

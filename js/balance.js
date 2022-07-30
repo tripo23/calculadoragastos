@@ -41,12 +41,29 @@ transacciones = await getData(usrApiID());
 
 /* Calculo los totales, según el tipo de transacción */
 const calcularTotales = () => {
-    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, lblGastos, selectMeses.value);
-    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, lblIngresos, selectMeses.value);
-    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, lblAhorros, selectMeses.value);
+    console.log(String(parseInt(selectMeses.value)-1)); 
+
+    let mesAnterior = String(parseInt(selectMeses.value)-1);
+ 
+    //Calculo el balance del mes anterior
+    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, mesAnterior);
+    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, mesAnterior);
+    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, mesAnterior);
+
+    let totalBalanceAnterior = totalIngresos - totalAhorros - totalGastos
+
+    //Calculo y muestro la sumatoria de ingresos, gastos y ahorros
+    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, selectMeses.value);
+    lblGastos.innerText = "$ " + totalGastos;
+
+    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, selectMeses.value);
+    lblIngresos.innerText = "$ " + totalIngresos;
+
+    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, selectMeses.value);
+    lblAhorros.innerText = "$ " + totalAhorros;
     
     /* Calculo el balance */
-    totalBalance = totalIngresos - totalAhorros - totalGastos;
+    totalBalance = totalIngresos - totalAhorros - totalGastos + totalBalanceAnterior;
     lblBalance.innerText = "$ " + totalBalance;
 }
 
@@ -68,8 +85,20 @@ dolarBlue(lblDolar);
 // Invierto el orden así la más nueva, se muestra primero.
 Array.prototype.reverse.call(transacciones);
 
+
+
+
 // Si hay transacciones populo la tabla con las últimas 10.
 if (transacciones.length > 0) {
+
+    //Agrego elemento "orden" basado en la fecha de la transacción
+    transacciones.forEach(element => {
+        let orden = (new Date (element.fecha)).getTime();
+        element.orden = orden;
+    });
+
+    transacciones = transacciones.sort((a,b) => b.orden - a.orden);
+
     transacciones.slice(0,10).forEach(transaccion => {
         let tr = document.createElement('tr');
         tbody.appendChild(tr);

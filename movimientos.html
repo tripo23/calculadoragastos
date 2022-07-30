@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movimientos</title>
     <link rel="stylesheet" href="./style/css/main.css">
 
     <!-- Bootstrap -->
@@ -15,9 +15,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
 </head>
 
@@ -29,14 +27,20 @@
                 <</button> <h3 class="tituloSeccion">Movimientos</h3>
         </div>
         <div class="divContenedor--movimientos">
+            
+            <select id="selectCategorias" required class="selectForm">
+                <option text="Categorías" value="">Todas las categorías</option>
+            </select>
+            <input type="text" id="searchDescripcion" placeholder="Buscar por descripción" class="inputsForm">
+
             <table id="tablaMovimientos" class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Categoría</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Monto</th>
+                        <th data-field="fecha" scope="col">Fecha</th>
+                        <th data-field="tipo" data-filter-control="tipo" scope="col">Tipo</th>
+                        <th data-field="categoria" scope="col">Categoría</th>
+                        <th data-field="descripcion" scope="col">Descripción</th>
+                        <th data-field="monto" scope="col">Monto</th>
                     </tr>
                 </thead>
                 <tbody id="tbody" class="table-group-divider"></tbody>

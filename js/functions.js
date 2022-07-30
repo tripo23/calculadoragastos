@@ -93,14 +93,14 @@ const fechaHoy = (input) => {
 }
 
 /* Autocompleto la fecha de cierre estimada de la TC */
-const fechaCierreTC = (input) => {
-    let today = new Date();
-    let dd = String(28); // harcodeo que cierra el 28.
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
+const fechaCierreTC = (input, cierre = new Date ()) => {
 
-    today = yyyy + '-' + mm + '-' + dd;
-    input.defaultValue = today;
+    let dd = String(28); // harcodeo que cierra el 28.
+    let mm = String(cierre.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = cierre.getFullYear();
+    
+    cierre = yyyy + '-' + mm + '-' + dd;
+    input.defaultValue = cierre;
 }
 
  /* Mes actual */
@@ -115,7 +115,7 @@ const fechaCierreTC = (input) => {
 let fechaMesBalance = new Date ();
 let fbeom = new Date ();
 
-const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, mes) => {
+const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, mes) => {
     
     mes = parseInt(mes-1);
     
@@ -126,34 +126,6 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, m
     fbeom.setMonth(mes+1);
     fbeom.setDate(0);
     fbeom.setHours(0,0,0,0);
-    
-
-    // let arrayFecha = new Date(arrayPrincipal[0].fecha);
-    // let arrayFechaInicio = new Date(arrayPrincipal[0].fechaInicio);
-    // let arrayfechaFin = new Date(arrayPrincipal[0].fechaFin);
-
-
-    // console.log("fecha del array");
-    // console.log(arrayFecha);
-    // //console.log(arrayFecha.getTime());
-    // console.log("primer día del mes del balance");
-    // console.log(fechaMesBalance);
-    // //console.log(fechaMesBalance.getTime());
-    // console.log("último día del mes del balance");
-    // console.log(fbeom);
-    // //console.log(fbeom.getTime());
-    // console.log("primer día de la primera cuota");
-    // console.log(arrayFechaInicio);
-    // //console.log(arrayFechaInicio.getTime());
-    // console.log("último día de la última cuota");
-    // console.log(arrayfechaFin);
-    
-
-    // if ((arrayFecha.getTime() >= fechaMesBalance.getTime()) && (arrayFecha.getTime() <= fbeom.getTime()) && fechaMesBalance.getTime() <= fechaFin.getTime()) {
-    //     console.log("la fecha del array es mayor que la fecha del balance y menor que el fin de mes");
-    // } else {
-    //     console.log("nope");
-    // }
     
 
     array = arrayPrincipal.filter(e => {
@@ -177,8 +149,6 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, m
              (new Date(e.fechaInicio).getTime() <= fechaMesBalance.getTime());
         }
     });
-
-    
     
     for (const t of array) {
         if (t.metodoDePago === "ft" || t.metodoDePago == "" ) {
@@ -187,10 +157,11 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, label, m
             agrupador += parseFloat(t.montoCuota);
         }
     }
-
-    label.innerText = "$ " + agrupador;
     return agrupador;
 }
+
+
+
 
 // Usuario toca el boton "+".
 const link = (boton, destino) => {
