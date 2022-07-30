@@ -1,4 +1,4 @@
-let username = localStorage.getItem("user");
+let username = localStorage.getItem("userCDG");
 let usrID = "";
 
 const usrApiID = () => {

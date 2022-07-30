@@ -1,6 +1,7 @@
 import {
   getData,
-  populateSelect
+  populateSelect,
+  checkSession
 } from "./functions.js";
 import {
   usrApiID
@@ -10,6 +11,10 @@ let apiGastos = "62c4c0c64bccf21c2ecf4b68";
 let tbody = document.getElementById("tbody");
 let inputSearch = document.getElementById("searchDescripcion");
 let listCategorias = document.getElementById("selectCategorias");
+
+/* Chequeo si está logueado */
+checkSession();
+
 populateSelect(apiGastos, listCategorias);
 
 /* Me traigo las transacciones guardadas */

@@ -3,7 +3,8 @@ import {
     populateMonth,
     link,
     dolarBlue,
-    getData
+    getData,
+    checkSession
 } from "./functions.js";
 import { usrApiID } from "./users.js";
 
@@ -29,6 +30,9 @@ let lblIngresos = document.getElementById("lblMontoIngresos");
 let lblBalance = document.getElementById("lblMontoBalance");
 let lblDolar = document.getElementById("lblDolar");
 let apiMeses = "62c4c5904bccf21c2ecf536c";
+
+/* Chequeo si está logueado */
+checkSession();
 
 /* Completo los meses en el select, y asigno el mes actual como valor por default */
 populateMonth("meses", selectMeses);

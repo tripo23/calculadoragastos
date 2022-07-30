@@ -4,7 +4,8 @@ import {
     calculadoraDeCuotas,
     ultimaCuota,    
     primeraCuota,
-    fechaCierreTC
+    fechaCierreTC,
+    checkSession
 } from './functions.js';
 
 import {
@@ -31,7 +32,8 @@ let fechaMovimiento;
 let fechaInicio;
 let fechaFin;
 
-
+/* Chequeo si está logueado */
+checkSession();
 
 
 

@@ -231,6 +231,14 @@ const ultimaCuota = (fechaMovimiento, fechaCierre, qCuotas) => {
     return ultima;
 }
 
+const checkSession = () => {
+    if (localStorage.getItem("userCDG")) {
+        
+    } else {
+        window.location.href = "index.html";
+    }
+}
+
 export {
     populateSelect,
     populateMonth,
@@ -247,5 +255,6 @@ export {
     arsToUsd,
     validarRadioButton,
     primeraCuota,
-    ultimaCuota
+    ultimaCuota,
+    checkSession
 };

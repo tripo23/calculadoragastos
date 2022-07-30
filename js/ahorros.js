@@ -1,8 +1,8 @@
 import {
     arsToUsd,
     fechaHoy,
-    populateSelect,
-    validarRadioButton
+    validarRadioButton,
+    checkSession
 } from './functions.js';
 
 import {
@@ -23,6 +23,10 @@ let ars = document.getElementById("radioARS");
 let usd = document.getElementById("radioUSD");
 let moneda = validarRadioButton(radioButtons);
 let fechaMovimiento;
+
+/* Chequeo si está logueado */
+checkSession();
+
 
 const ConvertirAUsd = () => {
     moneda = validarRadioButton(radioButtons);

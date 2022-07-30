@@ -1,6 +1,7 @@
 import {
     fechaHoy,
-    populateSelect
+    populateSelect,
+    checkSession
 } from './functions.js';
 
 import {
@@ -16,6 +17,10 @@ let inputFecha = document.getElementById("fechaIngreso");
 let formularioTransaccion = document.getElementById("ingresarContainerIngreso");
 let apiIngresos = "62c4c5584bccf21c2ecf530e";
 let fechaMovimiento;
+
+
+/* Chequeo si está logueado */
+checkSession();
 
 /* Completo los select y el input de fecha */
 populateSelect(apiIngresos, listCategoria);
