@@ -1,2 +1,3 @@
-localStorage.removeItem("userCDG");
-window.location.href = "index.html";
+import { signOut } from "./functions.js";
+
+signOut();

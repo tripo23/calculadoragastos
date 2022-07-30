@@ -239,6 +239,11 @@ const checkSession = () => {
     }
 }
 
+const signOut = () => {
+    localStorage.removeItem("userCDG");
+    window.location.href = "index.html";
+}
+
 export {
     populateSelect,
     populateMonth,
@@ -256,5 +261,6 @@ export {
     validarRadioButton,
     primeraCuota,
     ultimaCuota,
-    checkSession
+    checkSession,
+    signOut
 };
