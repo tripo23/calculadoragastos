@@ -115,38 +115,38 @@ const fechaCierreTC = (input, cierre = new Date ()) => {
 let fechaMesBalance = new Date ();
 let fbeom = new Date ();
 
-const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, mes) => {
+const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, fechaBalance) => {
+
+    // mes = parseInt(mes-1);
     
-    mes = parseInt(mes-1);
+    // fechaMesBalance.setMonth(mes);
+    // fechaMesBalance.setDate(1);
+    // fechaMesBalance.setHours(0,0,0,0);
     
-    fechaMesBalance.setMonth(mes);
-    fechaMesBalance.setDate(1);
-    fechaMesBalance.setHours(0,0,0,0);
-    
-    fbeom.setMonth(mes+1);
+    let fb = new Date (fechaBalance); 
+
+    fbeom = new Date (fb);
+    fbeom.setMonth(fb.getMonth()+1)
     fbeom.setDate(0);
     fbeom.setHours(0,0,0,0);
+
     
 
     array = arrayPrincipal.filter(e => {
         
         // para cash
         if (e.metodoDePago === "ft" || e.metodoDePago == "") {
-            //1. Que matchee el tipo
-            //2. Que la fecha de transacción sea posterior o igual al primer día del mes del balance.
-            //3. Que la fecha de transacción sea anterior o igual al último día del mes del balance.
-            //4. Que la fecha del balance (1er día del mes) sea menor o igual que la fecha de la última cuota (en caso de diferido, o en caso de pago recurrente <tbd>)
-            return (e.tipo.toLowerCase().includes(tipo)) && (new Date(e.fecha).getTime() >= fechaMesBalance.getTime()) && (new Date(e.fecha).getTime() <= fbeom.getTime() && (fechaMesBalance.getTime() <= new Date (e.fechaFin).getTime() || e.fechaFin == ""));
+            
+            return (e.tipo.toLowerCase().includes(tipo)) && 
+            (new Date(e.fecha).getTime() >= fb.getTime()) &&
+            (new Date(e.fecha).getTime() <= fbeom.getTime());
+            //&& (fechaMesBalance.getTime() <= new Date (e.fechaFin).getTime() || e.fechaFin == "")
         } else {
             // para tc
-            //1. Que matchee el tipo
-            //2. Que la fecha de última cuota sea posterior o igual al primer día del mes del balance. 
-            //3. Que la fecha de primera cuota sea anterior o igual al último día del mes del balance. 
-            
-            
+
             return (e.tipo.toLowerCase().includes(tipo)) &&
-             (new Date(e.fechaFin).getTime() >= fechaMesBalance.getTime()) &&
-             (new Date(e.fechaInicio).getTime() <= fechaMesBalance.getTime());
+             (new Date(e.fechaFin).getTime() >= fb.getTime()) &&
+             (new Date(e.fechaInicio).getTime() <= fb.getTime());
         }
     });
     
@@ -160,7 +160,102 @@ const mostrarSumaTransaccion = (arrayPrincipal, array, tipo, agrupador, mes) => 
     return agrupador;
 }
 
+const balanceAcumulado = (arrayPrincipal, agrupador, fechaBalance) => {
 
+    let montoIngresos=0;
+    let montoAhorros=0;
+    let montoGastos=0;
+
+    let fb = new Date (fechaBalance);
+    fb.setMonth(fb.getMonth()-1); // Voy un mes atrás de mi fecha de balance actual.
+    console.log(fb);
+    
+    fbeom = new Date (fb);
+    fbeom.setMonth(fb.getMonth()+1)
+    fbeom.setDate(0);
+    fbeom.setHours(0,0,0,0);
+
+    let ingresos = arrayPrincipal.filter(e => {
+        
+            return (e.tipo.toLowerCase().includes("ingreso")) && (new Date(e.fecha).getTime() <= fbeom.getTime());
+       
+    });
+
+    let ahorros = arrayPrincipal.filter(e => {
+        
+        return (e.tipo.toLowerCase().includes("ahorro")) && (new Date(e.fecha).getTime() <= fbeom.getTime());
+   
+    });
+
+    let gastos = arrayPrincipal.filter(e => {
+        
+                // para cash
+                if (e.metodoDePago === "ft" || e.metodoDePago == "") {
+                    return (e.tipo.toLowerCase().includes("gasto")) && 
+                    (new Date(e.fecha).getTime() <= fbeom.getTime());
+                    
+                    
+                } else {
+                    
+                    return (e.tipo.toLowerCase().includes("gasto")) &&
+                     (new Date(e.fechaInicio).getTime() <= fbeom.getTime() 
+                     //&& (fb.getTime() >= new Date (e.fechaFin).getTime() || e.fechaFin == "")
+                     );                    
+                }
+   
+    });
+
+    
+    for (const t of ingresos) {
+        montoIngresos += parseFloat(t.monto);
+
+    }
+    // console.log("Ingresos:");
+    // console.log(montoIngresos);
+
+    for (const t of ahorros) {
+        montoAhorros += parseFloat(t.monto);
+
+    }
+    // console.log("Ahorros:");
+    // console.log(montoAhorros);
+    console.log(gastos);
+    for (const t of gastos) {
+        if (t.metodoDePago === "ft" || t.metodoDePago == "" ) {
+            montoGastos += parseFloat(t.monto);
+        } else {
+            let finicio = new Date (t.fechaInicio);
+            let diff = fb.getTime()-finicio.getTime();
+            console.log(t.descripcion);
+            console.log(finicio);
+            console.log(fb);
+            const day = 1000*60*60*24;
+            
+            let days = Math.floor(diff/day);
+            
+            let months = Math.round(days/31)+1;
+            //let months = days/31+1;
+            console.log(months);
+            
+            //months <= t.qCuotas ? months = months : months = t.qCuotas;
+
+            if (months > t.qCuotas) {
+                months = t.qCuotas;
+            }
+            console.log(months);
+            
+            montoGastos += parseFloat(t.montoCuota*months);
+        }
+    }
+    // console.log("Gastos:");
+    // console.log(montoGastos);
+    
+    agrupador = montoIngresos - montoAhorros - montoGastos;
+    // console.log("Balance:");
+    // console.log(agrupador);
+
+    return agrupador;
+}
 
 
 // Usuario toca el boton "+".
@@ -202,7 +297,7 @@ const validarRadioButton = (radio) => {
 }
 
 const primeraCuota = (fechaMovimiento, fechaCierre) => {
-    let primera = new Date ()
+    let primera = new Date (fechaMovimiento);
     if (fechaMovimiento.getTime() <= fechaCierre.getTime()) {
         primera.setMonth(fechaMovimiento.getMonth() + 1);
         
@@ -212,12 +307,11 @@ const primeraCuota = (fechaMovimiento, fechaCierre) => {
     }
     primera.setDate(1);
     primera.setHours(0,0,0,0);
-    console.log("primera");
     return primera;
 }
 
 const ultimaCuota = (fechaMovimiento, fechaCierre, qCuotas) => {
-    let ultima = new Date ()
+    let ultima = new Date (fechaMovimiento)
 
     if (fechaMovimiento.getTime() <= fechaCierre.getTime()) {
         ultima.setMonth(fechaMovimiento.getMonth() + parseInt(qCuotas) + 1);
@@ -262,5 +356,6 @@ export {
     primeraCuota,
     ultimaCuota,
     checkSession,
-    signOut
+    signOut,
+    balanceAcumulado
 };

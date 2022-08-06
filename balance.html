@@ -28,6 +28,14 @@
             <span></span>
             <h3 class="tituloSeccion">Balance</h3>
             <select id="selectorMes" class="selectForm--mes" required></select>
+            <select id="selectorAno" class="selectForm--mes" required>
+                <option value="2023">2023</option>
+                <option selected="selected" value="2022" >2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+            </select>
             <span></span>
         </div>
 
@@ -38,7 +46,7 @@
                 <label id="lblMontoBalance">$0</label>
                 <label id="lblplaceholder"></label>
             </div>
-
+            <label id="lblBalancePrevio" class="labelsForm"></label>
             <div class="pastilla--ingresos">
                 <div class="pastillaLeft--ingresos">
                     <label id="lblIngresos">Ingresos</label>
@@ -67,7 +75,7 @@
                     <input id="btnAgregarAhorro" class="btn--agregar" type="submit" value="+">
                 </div>
             </div>
-
+            
             <label id="lblDolar" class="labelsForm"></label>
         </div>
 

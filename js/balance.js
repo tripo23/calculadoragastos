@@ -4,19 +4,22 @@ import {
     link,
     dolarBlue,
     getData,
-    checkSession
+    checkSession,
+    balanceAcumulado
 } from "./functions.js";
 import { usrApiID } from "./users.js";
 
 
 let transacciones;
 let selectMeses = document.getElementById("selectorMes");
+let selectAno = document.getElementById("selectorAno");
 let agregarGasto = document.getElementById("btnAgregarGasto");
 let agregarIngreso = document.getElementById("btnAgregarIngreso");
 let agregarAhorro = document.getElementById("btnAgregarAhorro");
+let balancePrevio = document.getElementById("lblBalancePrevio");
 let gastos = [];
 let ahorros = [];
-let ingresos = []
+let ingresos = [];
 let totalGastos = 0;
 let agrupadorGastos = 0;
 let totalAhorros = 0;
@@ -24,6 +27,7 @@ let totalBalance = 0;
 let agrupadorAhorros = 0;
 let totalIngresos = 0;
 let agrupadorIngresos = 0;
+let agrupadorBalanceAc = 0;
 let lblGastos = document.getElementById("lblMontoGastos");
 let lblAhorros = document.getElementById("lblMontoAhorro");
 let lblIngresos = document.getElementById("lblMontoIngresos");
@@ -43,32 +47,42 @@ populateMonth("meses", selectMeses);
 transacciones = await getData(usrApiID());
 
 
+
+
 /* Calculo los totales, según el tipo de transacción */
 const calcularTotales = () => {
-    console.log(String(parseInt(selectMeses.value)-1)); 
+    
+    let fechaBalance = new Date ()
+    fechaBalance.setFullYear(selectAno.value);
+    fechaBalance.setMonth(parseInt(selectMeses.value)-1);
+    fechaBalance.setDate(1);
+    fechaBalance.setHours(0,0,0,0);
+    
 
-    let mesAnterior = String(parseInt(selectMeses.value)-1);
- 
     //Calculo el balance del mes anterior
-    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, mesAnterior);
-    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, mesAnterior);
-    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, mesAnterior);
+    
+    agrupadorBalanceAc = balanceAcumulado (transacciones, agrupadorBalanceAc, fechaBalance);
+    balancePrevio.innerText ="Balance mes anterior $" + agrupadorBalanceAc;
 
-    let totalBalanceAnterior = totalIngresos - totalAhorros - totalGastos
+
 
     //Calculo y muestro la sumatoria de ingresos, gastos y ahorros
-    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, selectMeses.value);
-    lblGastos.innerText = "$ " + totalGastos;
-
-    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, selectMeses.value);
+    
+    totalIngresos = mostrarSumaTransaccion(transacciones, ingresos, "ingreso", agrupadorIngresos, fechaBalance);
     lblIngresos.innerText = "$ " + totalIngresos;
 
-    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, selectMeses.value);
+    totalAhorros = mostrarSumaTransaccion(transacciones, ahorros, "ahorro", agrupadorAhorros, fechaBalance);
     lblAhorros.innerText = "$ " + totalAhorros;
-    
+
+    totalGastos = mostrarSumaTransaccion(transacciones, gastos, "gasto", agrupadorGastos, fechaBalance);
+    lblGastos.innerText = "$ " + totalGastos;
+
     /* Calculo el balance */
-    totalBalance = totalIngresos - totalAhorros - totalGastos + totalBalanceAnterior;
-    lblBalance.innerText = "$ " + totalBalance;
+    //totalBalance = totalIngresos - totalAhorros - totalGastos + totalBalanceAnterior;
+    totalBalance = totalIngresos - totalAhorros - totalGastos + agrupadorBalanceAc;
+    lblBalance.innerText = "$ " + totalBalance.toFixed(2);
+    
+    //localStorage.setItem(`balance${selectMeses.value}-${(new Date().getFullYear())}-${usrApiID()}`,totalBalance)
 }
 
 calcularTotales();
