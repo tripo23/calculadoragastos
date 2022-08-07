@@ -35,6 +35,15 @@ transacciones = transacciones.sort((a,b) => b.orden - a.orden);
 transacciones.forEach(transaccion => {
 
   let tr = document.createElement('tr');
+  let ultCuota;
+  console.log(transaccion.fechaFin);
+  if (transaccion.fechaFin == "") {
+    ultCuota="";
+  } else {
+    ultCuota = new Date (transaccion.fechaFin);  
+    ultCuota = ultCuota.toLocaleString('es-AR', { month: 'short', year: '2-digit' })
+  }
+  
   tbody.appendChild(tr);
   tr.innerHTML = `
                     <td>${transaccion.fecha.slice(0,10)}</td>
@@ -42,6 +51,8 @@ transacciones.forEach(transaccion => {
                     <td>${transaccion.categoria}</td>
                     <td>${transaccion.descripcion}</td>
                     <td>$${transaccion.monto}</td>
+                    <td>$${transaccion.montoCuota}</td>
+                    <td>${ultCuota}</td>
                   `
 });
 
